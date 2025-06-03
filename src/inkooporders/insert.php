@@ -1,14 +1,14 @@
 <?php
 // auteur: Dylan van schouwen
-// functie: insert class Klant
+// functie: insert class inkooporders
 
 // Autoloader classes via composer
 require '../../vendor/autoload.php';
-use Bas\classes\Klant;
+use Bas\classes\inkooporders;
 
 if(isset($_POST["insert"]) && $_POST["insert"] == "Toevoegen"){
 
-		// Code insert klant
+		// Code insert inkooporders
 } 
 
 ?>
@@ -23,14 +23,14 @@ if(isset($_POST["insert"]) && $_POST["insert"] == "Toevoegen"){
 </head>
 <body>
 
-	<h1>CRUD Klant</h1>
+	<h1>CRUD inkooporders</h1>
 	<h2>Toevoegen</h2>
 	<form method="post">
-	<label for="nv">Klantnaam:</label>
-	<input type="text" id="nv" name="klantnaam" placeholder="Klantnaam" required/>
+	<label for="nv">inkoopordersnaam:</label>
+	<input type="text" id="nv" name="inkoopordersnaam" placeholder="inkoopordersnaam" required/>
 	<br>   
-	<label for="an">Klantemail:</label>
-	<input type="text" id="an" name="klantemail" placeholder="Klantemail" required/>
+	<label for="an">inkoopordersemail:</label>
+	<input type="text" id="an" name="inkoopordersemail" placeholder="inkoopordersemail" required/>
 	<br><br>
 	<input type='submit' name='insert' value='Toevoegen'>
 	</form></br>

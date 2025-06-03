@@ -4,17 +4,17 @@
 
 // Autoloader classes via composer
 require '../../vendor/autoload.php';
-use Bas\classes\Klant;
+use Bas\classes\gebruikers;
 
 if(isset($_POST["verwijderen"])){
 	
-	// Maak een object Klant
+	// Maak een object gebruikers
 	
 	
-	// Delete Klant op basis van NR
+	// Delete gebruikers op basis van NR
 	
 
-	echo '<script>alert("Klant verwijderd")</script>';
+	echo '<script>alert("gebruikers verwijderd")</script>';
 	echo "<script> location.replace('read.php'); </script>";
 }
 ?>

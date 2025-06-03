@@ -1,10 +1,9 @@
 <?php
-// auteur: studentnaam
+// auteur: Dylan
 // functie: configuratiebestand
 
-define("DATABASE", "bas_2022");
+define("DATABASE", "bas_boodschappenservice"); 
 define("SERVERNAME", "localhost");
 define("USERNAME", "root");
 define("PASSWORD", "");
-
 ?>

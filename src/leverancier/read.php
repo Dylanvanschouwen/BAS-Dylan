@@ -1,6 +1,6 @@
 <!--
-	Auteur: Dylan van schouwen
-	Function: home page CRUD Klant
+	Auteur: Studentnaam
+	Function: home page CRUD leverancier
 -->
 <!DOCTYPE html>
 <html lang="nl">
@@ -12,10 +12,10 @@
 </head>
 
 <body>
-	<h1>CRUD Klant</h1>
+	<h1>CRUD leverancier</h1>
 	<nav>
 		<a href='../index.html'>Home</a><br>
-		<a href='insert.php'>Toevoegen nieuwe klant</a><br><br>
+		<a href='insert.php'>Toevoegen nieuwe leverancier</a><br><br>
 	</nav>
 	
 <?php
@@ -23,13 +23,13 @@
 // Autoloader classes via composer
 require '../../vendor/autoload.php';
 
-use Bas\classes\Klant;
+use Bas\classes\leverancier;
 
-// Maak een object Klant
-$klant = new Klant;
+// Maak een object leverancier
+$leverancier = new leverancier;
 
 // Start CRUD
-$klant->crudKlant();
+$leverancier->crudleverancier();
 
 ?>
 </body>

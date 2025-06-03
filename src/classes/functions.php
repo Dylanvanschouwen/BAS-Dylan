@@ -1,5 +1,5 @@
 <?php
-// auteur: studentnaam
+// auteur: Dylan van schouwen
 // functie: algemene functies 
 
 function getTableHeader(array $row) : string {

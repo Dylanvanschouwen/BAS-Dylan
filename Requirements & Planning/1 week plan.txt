@@ -1,0 +1,119 @@
+Projectplanning BBB - Functionaliteitenoverzicht en Taakverdeling
+
+========================================
+📝 ALGEMEEN (voor het hele project)
+========================================
+
+- Use Case Diagram maken
+- Burndown Chart bijhouden
+- Database aanmaken en vullen met testdata
+- Queries schrijven / PHP-code programmeren (OOP + PDO)
+- Externe CSS maken (voor opmaak)
+- Wireframes ontwerpen per gebruikersrol
+- Loginsysteem bouwen (could have)
+- Dynamisch hoofdmenu tonen op basis van ingelogde rol
+- Elke pagina moet:
+  - Beginnen met logo en bedrijfsnaam
+  - Eindigen met een footer met telefoonnummer (0800.11.11.216) en vermelding "Gratis vanuit Nederland"
+
+========================================
+🧑‍💼 VERKOPER (Jaap Schaap)
+========================================
+
+🔹 Klant CRUD (Must haves)
+- Klantenoverzicht tonen
+- Klant toevoegen
+- Klantgegevens aanpassen
+- Klant verwijderen
+- Zoeken op klantnaam
+- Overzicht tonen als klant niet wordt gevonden
+
+🔹 Extra zoekmogelijkheden (Could have)
+- Zoeken op postcode
+
+🔹 Artikel zoeken
+- Zoeken op artikelnaam (voorraad controleren)
+- Voorraad aanpassen na verkoop
+
+🔹 Verkooporder CRUD (Must haves)
+- Verkooporders tonen
+- Verkooporder toevoegen
+- Verkooporder wijzigen
+- Verkooporder verwijderen
+- Zoeken op verkooporder-ID
+
+🔹 Verkooporder zoekopties (Could have)
+- Zoeken op klantnummer
+- Zoeken op datum
+
+========================================
+📦 MAGAZIJNMEESTER (Andesh Hari)
+========================================
+
+🔹 Artikel CRUD (Must haves)
+- Artikelen toevoegen
+- Artikelgegevens wijzigen (zoals prijs)
+- Artikel verwijderen
+
+🔹 Artikelen zoeken
+- Overzicht tonen van alle artikelen
+- Zoeken op artikel-ID (Must have)
+- Zoeken op omschrijving (Could have)
+
+========================================
+🏷️ MAGAZIJNMEDEWERKER (Leonie de Heer)
+========================================
+
+🔹 Artikelen bekijken
+- Overzicht met alle artikelen + locatie (Must have)
+- Zoeken op artikel-ID (Must have)
+- Zoeken op artikelomschrijving (Could have)
+
+🔹 Verkooporderstatus aanpassen
+- Bij picken en doorgeven aan bezorger (Must have)
+
+========================================
+🚚 BEZORGER (Redouan Sanu)
+========================================
+
+🔹 Klantinformatie bekijken
+- Adres opzoeken via klant-ID (Must have)
+
+🔹 Verkooporderstatus aanpassen
+- Na aflevering bestelling (Must have)
+
+========================================
+📥 INKOPER (Peter de Jager)
+========================================
+
+🔹 Artikelen controleren
+- Overzicht van alle artikelen (Must have)
+- Overzicht van artikelen met voorraad < minimum (Must have)
+- Zoeken op artikelnummer (Must have)
+
+🔹 Inkooporder CRUD
+- Inkooporder toevoegen
+- Inkooporders bekijken
+- Inkooporder wijzigen
+- Inkooporder verwijderen
+- Zoeken op inkooporder-ID
+
+🔹 Leveranciers CRUD
+- Leverancier toevoegen
+- Leveranciers bekijken
+- Leverancier wijzigen
+- Leverancier verwijderen
+- Zoeken op leveranciers-ID (Must have)
+- Zoeken op leveranciersnaam (Should have)
+
+🔹 Bestellijst genereren (Should have)
+- Alleen artikelen met voorraad < minimum
+- Toon artikelnummer, bestelhoeveelheid (max - voorraad) en e-mail van leverancier
+
+========================================
+🔐 LOGIN EN ROLLENGEBONDEN MENU (Could have)
+========================================
+
+- Gebruiker kan inloggen
+- Afhankelijk van rol direct doorgestuurd naar eigen startscherm
+- Alleen functionaliteit tonen die hoort bij rol

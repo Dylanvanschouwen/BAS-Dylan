@@ -28,7 +28,7 @@ class Klant extends Database
         $stmt->execute(['id' => $klantId]);
         $result = $stmt->fetch();
         return $result ? $result : null;
-	}
+    }
 
     // Voeg een klant toe
     public function insertKlant(array $data): bool
@@ -43,7 +43,7 @@ class Klant extends Database
             'postcode'  => $data['klantPostcode'],
             'woonplaats' => $data['klantWoonplaats']
         ]);
-	}
+    }
 
     // Update klantgegevens
     public function updateKlant(int $klantId, array $data): bool
@@ -72,21 +72,21 @@ class Klant extends Database
         $sql = "DELETE FROM $this->table_name WHERE klantId = :id";
         $stmt = self::$conn->prepare($sql);
         return $stmt->execute(['id' => $klantId]);
-	}
+    }
 
     // Toon een HTML-tabel van klanten
     public function showTable(array $lijst): void
     {
-if (empty($lijst)) {
+        if (empty($lijst)) {
             echo "<p>Geen klanten gevonden.</p>";
             return;
         }
-		$txt = "<table>";
+        $txt = "<table>";
 
-		// Voeg de kolomnamen boven de tabel
-		$txt .= getTableHeader($lijst[0]);
+        // Voeg de kolomnamen boven de tabel
+        $txt .= getTableHeader($lijst[0]);
         foreach ($lijst as $row) {
-			$txt .= "<tr>";
+            $txt .= "<tr>";
             $txt .= "<td>" . htmlspecialchars($row["klantId"]) . "</td>";
             $txt .= "<td>" . htmlspecialchars($row["klantNaam"]) . "</td>";
             $txt .= "<td>" . htmlspecialchars($row["klantEmail"]) . "</td>";
@@ -107,11 +107,11 @@ if (empty($lijst)) {
                     <button type='submit' name='verwijderen'>Verwijderen</button>
                 </form>
             </td>";
-			$txt .= "</tr>";
-		}
-		$txt .= "</table>";
-		echo $txt;
-	}
+            $txt .= "</tr>";
+        }
+        $txt .= "</table>";
+        echo $txt;
+    }
 
     // Toon een dropdown met klanten
     public function dropDownKlant($row_selected = -1)
@@ -125,12 +125,12 @@ if (empty($lijst)) {
                 htmlspecialchars($row["klantNaam"]) . " (" . htmlspecialchars($row["klantEmail"]) . ")</option>\n";
         }
         echo "</select>";
-}
-	
+    }
+
     // CRUD-overzicht (tabel tonen)
     public function crudKlant(): void
     {
         $lijst = $this->getKlanten();
         $this->showTable($lijst);
-	}
+    }
 }
