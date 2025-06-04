@@ -1,36 +1,85 @@
-<!--
-	Auteur: Studentnaam
-	Function: home page CRUD leverancier
--->
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crud</title>
-    <link rel="stylesheet" href="../style.css">
-</head>
-
-<body>
-	<h1>CRUD leverancier</h1>
-	<nav>
-		<a href='../index.html'>Home</a><br>
-		<a href='insert.php'>Toevoegen nieuwe leverancier</a><br><br>
-	</nav>
-	
 <?php
+// auteur: Dylan van schouwen
+// functie: Overzicht leveranciers
 
-// Autoloader classes via composer
 require '../../vendor/autoload.php';
+require_once '../classes/leverancier.php';
 
 use Bas\classes\leverancier;
 
-// Maak een object leverancier
-$leverancier = new leverancier;
+$leverancierObj = new leverancier();
 
-// Start CRUD
-$leverancier->crudleverancier();
+$zoekId = isset($_GET['zoekId']) ? trim($_GET['zoekId']) : '';
+$zoekNaam = isset($_GET['zoekNaam']) ? trim($_GET['zoekNaam']) : '';
 
+if ($zoekId !== '') {
+    $leveranciers = [];
+    $row = $leverancierObj->zoekOpId((int)$zoekId);
+    if ($row) $leveranciers[] = $row;
+} elseif ($zoekNaam !== '') {
+    $leveranciers = $leverancierObj->zoekOpNaam($zoekNaam);
+} else {
+    $leveranciers = $leverancierObj->getLeveranciers();
+}
+
+require_once '../Includes/header.php';
 ?>
+
+<main class="bas-main">
+    <div class="leverancier-zoek-container">
+        <form method="get" class="bas-tabel-zoek-form">
+            <input type="number" name="zoekId" class="bas-tabel-input" placeholder="Zoek op leverancier-ID" value="<?= htmlspecialchars($zoekId) ?>">
+            <input type="text" name="zoekNaam" class="bas-tabel-input" placeholder="Zoek op naam" value="<?= htmlspecialchars($zoekNaam) ?>">
+            <button type="submit" class="bas-tabel-btn">Zoek</button>
+            <a href="read.php" class="bas-tabel-btn">Reset</a>
+        </form>
+        <a href="insert.php" class="bas-tabel-btn bas-tabel-actieknop">Leverancier toevoegen</a>
+    </div>
+    <table class="bas-tabel">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Naam</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Adres</th>
+                <th>Postcode</th>
+                <th>Plaats</th>
+                <th>Wijzig</th>
+                <th>Verwijder</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php if (empty($leveranciers)): ?>
+            <tr>
+                <td colspan="9">Geen leveranciers gevonden.</td>
+            </tr>
+        <?php else: ?>
+            <?php foreach ($leveranciers as $lev): ?>
+                <tr>
+                    <td><?= htmlspecialchars($lev['levId']) ?></td>
+                    <td><?= htmlspecialchars($lev['levNaam']) ?></td>
+                    <td><?= htmlspecialchars($lev['levContact']) ?></td>
+                    <td><?= htmlspecialchars($lev['levEmail']) ?></td>
+                    <td><?= htmlspecialchars($lev['levAdres']) ?></td>
+                    <td><?= htmlspecialchars($lev['levPostcode']) ?></td>
+                    <td><?= htmlspecialchars($lev['levWoonplaats']) ?></td>
+                    <td>
+                        <a href="update.php?levId=<?= $lev['levId'] ?>" class="bas-tabel-btn">Wijzig</a>
+                    </td>
+                    <td>
+                        <form method="post" action="delete.php" onsubmit="return confirm('Weet je zeker dat je deze leverancier wilt verwijderen?');">
+                            <input type="hidden" name="levId" value="<?= $lev['levId'] ?>">
+                            <button type="submit" class="bas-tabel-btn">Verwijder</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        </tbody>
+    </table>
+</main>
+
+<?php require_once '../Includes/footer.php'; ?>
 </body>
 </html>

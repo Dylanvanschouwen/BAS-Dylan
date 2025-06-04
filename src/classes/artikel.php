@@ -48,24 +48,24 @@ class artikel extends Database {
     // Wijzig een artikel
     public function updateArtikel(int $artId, array $data): bool {
         $sql = "UPDATE $this->table_name SET
-            artOmschrijving = :artOmschrijving,
-            artInkoop = :artInkoop,
-            artVerkoop = :artVerkoop,
-            artVoorraad = :artVoorraad,
-            artMinVoorraad = :artMinVoorraad,
-            artMaxVoorraad = :artMaxVoorraad,
-            artLocatie = :artLocatie
+                artOmschrijving = :artOmschrijving,
+                artInkoop = :artInkoop,
+                artVerkoop = :artVerkoop,
+                artVoorraad = :artVoorraad,
+                artMinVoorraad = :artMinVoorraad,
+                artMaxVoorraad = :artMaxVoorraad,
+                artLocatie = :artLocatie
             WHERE artId = :artId";
         $stmt = self::$conn->prepare($sql);
         return $stmt->execute([
-            'artOmschrijving' => $data['artOmschrijving'],
-            'artInkoop' => $data['artInkoop'],
-            'artVerkoop' => $data['artVerkoop'],
-            'artVoorraad' => $data['artVoorraad'],
-            'artMinVoorraad' => $data['artMinVoorraad'],
-            'artMaxVoorraad' => $data['artMaxVoorraad'],
-            'artLocatie' => $data['artLocatie'],
-            'artId' => $artId
+            'artOmschrijving'   => $data['artOmschrijving'],
+            'artInkoop'         => $data['artInkoop'],
+            'artVerkoop'        => $data['artVerkoop'],
+            'artVoorraad'       => $data['artVoorraad'],
+            'artMinVoorraad'    => $data['artMinVoorraad'],
+            'artMaxVoorraad'    => $data['artMaxVoorraad'],
+            'artLocatie'        => $data['artLocatie'],
+            'artId'             => $artId
         ]);
     }
 

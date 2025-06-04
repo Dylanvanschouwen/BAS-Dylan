@@ -29,13 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Redirect based on role
         switch (strtolower($user['rol'])) {
             case 'verkoper':
-                header('Location: verkoper.php');
+                header('Location: verkoper-menu.php');
                 exit;
             case 'inkoper':
-                header('Location: inkoper.php');
+                header('Location: inkoper-menu.php');
                 exit;
-            case 'magazijn medewerker':
-                header('Location: magazijnmedewerker.php');
+            case 'magazijnmedewerker':
+                header('Location: magazijn-medewerker-menu.php');
                 exit;
             case 'bezorger':
                 header('Location: bezorger.php');
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Location: magazijn-meester.php');
                 exit;
             case 'admin':
-                header('Location: admin.php');
+                header('Location: admin-menu.php');
                 exit;
             default:
                 $error = "Onbekende rol.";

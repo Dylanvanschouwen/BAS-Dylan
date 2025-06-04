@@ -1,6 +1,88 @@
-/* =========================
-   ALGEMENE STIJLEN
-   ========================= */
+/* ==========================================================
+   ADMIN MENU (en andere hoofdmenu's)
+   ========================================================== */
+.bas-main {
+    background: #b00;
+    min-height: 80vh;
+    padding: 0;
+    margin: 0; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 12px #900;
+}
+
+.bas-main-title {
+    color: #fff;
+    font-size: 2.8em;
+    font-weight: bold;
+    margin: 40px 0 32px 0;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 8px #900;
+}
+
+.bas-main-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px 24px;
+    max-width: 1100px;
+    width: 95%;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 16px #9003;
+}
+
+.bas-main-btn {
+    background: #ff2222;
+    color: #fff;
+    border-radius: 8px;
+    padding: 48px 18px 32px 18px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+
+    box-shadow: 2px 2px 12px #900;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+    border: 4px solid #fff;
+    position: relative;
+    min-height: 220px;
+}
+
+.bas-main-btn:hover {
+    background: #b00;
+    color: #ffd700;
+    transform: scale(1.03);
+}
+
+.bas-main-btn-title {
+    font-size: 2.2em;
+    font-weight: bold;
+    margin-bottom: 18px;
+    line-height: 1.1;
+    letter-spacing: 1px;
+}
+
+.bas-main-btn-desc {
+    font-size: 1.05em;
+    font-weight: normal;
+    color: #fff;
+    opacity: 0.95;
+    margin-top: 8px;
+    line-height: 1.3;
+}
+
+
+
+/* ==========================================================
+   GENERAL STYLES (applies everywhere)
+   ========================================================== */
 html,
 body {
     width: 100%;
@@ -9,24 +91,16 @@ body {
 
 body {
     margin: 0;
-    background-color: #ED1B24;
     padding: 0;
+    background-color: #ED1B24;
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
     color: #fff;
 }
 
-#homepage-wrapper {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* =========================
-   HEADER
-   ========================= */
+/* ==========================================================
+   HEADER (Includes logo)
+   ========================================================== */
 #homepage-header {
     background: #ff2222;
     padding: 30px 20px 20px 20px;
@@ -45,7 +119,6 @@ body {
 #homepage-logo-box {
     background: #d00;
     width: 150px;
-    height: auto;
     color: #fff;
     padding: 20px 30px;
     border-radius: 8px;
@@ -60,12 +133,12 @@ body {
     font-weight: bold;
     line-height: 1.1;
     color: #fff;
-    padding: 10px 0 10px 0;
+    padding: 10px 0;
 }
 
-/* =========================
-   NAVIGATIE
-   ========================= */
+/* ==========================================================
+   NAVIGATION
+   ========================================================== */
 #nav {
     display: flex;
     justify-content: center;
@@ -90,11 +163,6 @@ body {
     transition: padding 0.2s;
 }
 
-#nav-list li {
-    margin: 0;
-    padding: 0;
-}
-
 #nav-list li a {
     color: #fff;
     text-decoration: none;
@@ -112,18 +180,18 @@ body {
     outline: none;
 }
 
-/* =========================
+/* ==========================================================
    FOOTER
-   ========================= */
+   ========================================================== */
 #footer {
     display: flex;
+    position: relative;
     background-color: #A50F0F;
     justify-content: space-between;
     align-items: center;
     padding: 25px 40px;
-    margin-top: 30px;
     border-radius: 0 0 8px 8px;
-    max-width: 900px;
+    margin-top: auto;
     margin-left: auto;
     margin-right: auto;
     font-size: 1em;
@@ -143,9 +211,17 @@ body {
     gap: 8px;
 }
 
-/* =========================
-   HOME PAGE 
-   ========================= */
+/* ==========================================================
+   HOME PAGE
+   ========================================================== */
+#homepage-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 #homepage-main {
     background: #c20;
     padding: 40px 0 60px 0;
@@ -195,9 +271,9 @@ body {
     color: #ffd700;
 }
 
-/* =========================
+/* ==========================================================
    LOGIN PAGE
-   ========================= */
+   ========================================================== */
 #login-main {
     background: #c20;
     min-height: 80vh;
@@ -209,7 +285,7 @@ body {
 
 .login-container {
     background: #b00;
-    padding: 40px 60px 40px 60px;
+    padding: 40px 60px;
     border-radius: 18px;
     box-shadow: 0 4px 24px #900;
     display: flex;
@@ -269,8 +345,8 @@ body {
 }
 
 .login-btn:hover {
-    background: #fff;
-    color: #b00;
+    background: #b00;
+    color: #ffd700;
 }
 
 .error-message {
@@ -285,21 +361,10 @@ body {
     width: 100%;
 }
 
-/* =========================
-   ARTIKELEN & MAGAZIJN TABEL (GEBRUIK VOOR ALLE ROLLEN)
-   ========================= */
-#magazijn-meester-main {
-    background: #b00;
-    min-height: 80vh;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 2px 12px #900;
-}
+/* ==========================================================
+   ARTIKELEN & MAGAZIJN 
+   ========================================================== */
 
-/* Zoekbalken en containers */
 .artikel-zoek-container {
     display: flex;
     justify-content: space-between;
@@ -321,6 +386,7 @@ body {
     font-size: 1em;
 }
 
+/* Buttons */
 .artikel-toevoegen-btn,
 .artikel-btn {
     background: #ff2222;
@@ -332,16 +398,17 @@ body {
     text-decoration: none;
     font-weight: bold;
     transition: background 0.2s;
+    display: inline-block;
+    text-align: center;
 }
 
 .artikel-toevoegen-btn:hover,
 .artikel-btn:hover {
-    background: #ff2222;
-    outline: none;
+    background: #b00;
     color: #ffd700;
 }
 
-/* Tabel zelf */
+/* Tabel */
 .artikel-tabel {
     width: 98%;
     max-width: 1100px;
@@ -390,9 +457,9 @@ body {
     text-align: center;
 }
 
-/* ========================
-   Artikel Formulier 
-   ========================= */
+/* ==========================================================
+   ARTIKEL FORMULIER (used for add/edit artikel)
+   ========================================================== */
 .formulier-container {
     display: flex;
     justify-content: center;
@@ -401,26 +468,24 @@ body {
     background: #a50f0f;
     margin: 0 auto;
     width: 100%;
-    flex-direction:column;
+    flex-direction: column;
 }
 
 .formulier-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 18px 32px;
+    gap: 8px 16px;
     background: #fff;
     color: #b00;
     border-radius: 12px;
     padding: 36px 38px 28px 38px;
-    min-width: 340px;
-    max-width: 600px;
     box-shadow: 0 2px 12px #900;
     position: relative;
 }
 
 .formulier-title {
     grid-column: 1 / -1;
-    color: #fff;
+    color: #b00;
     font-size: 2em;
     font-weight: bold;
     margin-bottom: 10px;
@@ -429,7 +494,7 @@ body {
 
 .formulier-label {
     font-weight: bold;
-    color: #fff;
+    color: #b00;
     align-self: center;
 }
 
@@ -457,9 +522,9 @@ body {
     margin-top: 18px;
 }
 
-/* =========================
+/* ==========================================================
    BEZORGER OVERZICHT
-   ========================= */
+   ========================================================== */
 .bezorger-main {
     background: #b00;
     min-height: 80vh;
@@ -510,7 +575,8 @@ body {
     box-shadow: 0 2px 12px #900;
 }
 
-.bezorger-tabel th, .bezorger-tabel td {
+.bezorger-tabel th,
+.bezorger-tabel td {
     border: 2.5px solid #b00;
     padding: 10px 8px;
     text-align: center;
@@ -527,6 +593,7 @@ body {
 .bezorger-tabel tr:nth-child(even) {
     background: #fff6f6;
 }
+
 .bezorger-tabel tr:hover {
     background: #ffd6d6;
 }
@@ -547,9 +614,9 @@ body {
     padding: 5px 12px;
 }
 
-/* =========================
-   MAGAZIJN MEDEWERKER MENU
-   ========================= */
+/* ==========================================================
+   MAGAZIJNMEDEWERKER MENU
+   ========================================================== */
 .magazijn-menu-main {
     background: #b00;
     min-height: 80vh;
@@ -624,4 +691,357 @@ body {
     opacity: 0.95;
     margin-top: 8px;
     line-height: 1.3;
+}
+
+/* ==========================================================
+   VERKOPER MENU
+   ========================================================== */
+.verkoper-menu-main {
+    background: #b00;
+    min-height: 80vh;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 12px #900;
+}
+
+.verkoper-menu-title {
+    color: #fff;
+    font-size: 2.8em;
+    font-weight: bold;
+    margin: 40px 0 32px 0;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 8px #900;
+}
+
+.verkoper-menu-grid {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 32px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px 24px;
+    max-width: 900px;
+    width: 95%;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 16px #9003;
+}
+
+.verkoper-menu-btn {
+    background: #ff2222;
+    color: #fff;
+    border-radius: 8px;
+    padding: 48px 18px 32px 18px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 2px 2px 12px #900;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+    border: 4px solid #fff;
+    position: relative;
+    min-height: 220px;
+}
+
+.verkoper-menu-btn:hover {
+    background: #b00;
+    color: #ffd700;
+    transform: scale(1.03);
+}
+
+.verkoper-menu-btn-title {
+    font-size: 2.2em;
+    font-weight: bold;
+    margin-bottom: 18px;
+    line-height: 1.1;
+    letter-spacing: 1px;
+}
+
+.verkoper-menu-btn-desc {
+    font-size: 1.05em;
+    font-weight: normal;
+    color: #fff;
+    opacity: 0.95;
+    margin-top: 8px;
+    line-height: 1.3;
+}
+
+/* ==========================================================
+   VERKOOPORDERS TABEL EN OVERZICHT
+   ========================================================== */
+.verkooporders-main {
+    background: #b00;
+    min-height: 80vh;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 12px #900;
+}
+
+.verkooporders-container {
+    background: #fff;
+    color: #b00;
+    border-radius: 12px;
+    padding: 32px 32px 24px 32px;
+    margin: 40px 0 40px 0;
+    box-shadow: 0 2px 12px #900;
+    width: 98%;
+    max-width: 1200px;
+}
+
+.verkooporders-title {
+    color: #b00;
+    font-size: 2.2em;
+    font-weight: bold;
+    margin-bottom: 24px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.verkooporders-topbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 18px;
+}
+
+.verkooporders-add-btn {
+    background: #ff2222;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-decoration: none;
+    box-shadow: 2px 2px 8px #900;
+    transition: background 0.2s, color 0.2s;
+    margin-bottom: 8px;
+}
+
+.verkooporders-add-btn:hover {
+    background: #b00;
+    color: #ffd700;
+}
+
+.verkooporders-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    color: #b00;
+    font-size: 1.1em;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px #900;
+}
+
+.verkooporders-table th,
+.verkooporders-table td {
+    border: 2.5px solid #b00;
+    padding: 10px 8px;
+    text-align: center;
+    background: #ffeaea;
+}
+
+.verkooporders-table th {
+    background: #ff2222;
+    color: #fff;
+    font-size: 1.05em;
+    border-bottom: 4px solid #b00;
+}
+
+.verkooporders-table tr:nth-child(even) {
+    background: #fff6f6;
+}
+
+.verkooporders-table tr:hover {
+    background: #ffd6d6;
+}
+
+.verkooporders-action-btn {
+    background: #ff2222;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 1px 1px 6px #900;
+    display: inline-block;
+}
+
+.verkooporders-action-btn:hover {
+    background: #b00;
+    color: #ffd700;
+}
+
+/* ==========================================================
+   VERKOOPORDERS FORMULIER (update/insert)
+   ========================================================== */
+.verkooporders-formulier-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    background: #a50f0f;
+    margin: 0 auto;
+    width: 100%;
+    flex-direction: column;
+}
+
+.verkooporders-formulier-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+    background: #fff;
+    color: #b00;
+    border-radius: 12px;
+    padding: 36px 38px 28px 38px;
+    box-shadow: 0 2px 12px #900;
+    position: relative;
+    min-width: 420px;
+    max-width: 520px;
+}
+
+.verkooporders-formulier-title {
+    grid-column: 1 / -1;
+    color: #b00;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.verkooporders-formulier-label {
+    font-weight: bold;
+    color: #b00;
+    align-self: center;
+}
+
+.verkooporders-formulier-input {
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 2px solid #b00;
+    font-size: 1em;
+    background: #ffeaea;
+    color: #b00;
+    font-weight: bold;
+}
+
+.verkooporders-formulier-input:focus {
+    outline: none;
+    border-color: #ffd700;
+    background: #fff6f6;
+}
+
+.verkooporders-formulier-btns {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 18px;
+}
+
+.verkooporders-btn {
+    background: #ff2222;
+    border: none;
+    outline: none;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.verkooporders-btn:hover {
+    background: #b00;
+    color: #ffd700;
+}
+
+.verkooporders-melding {
+    grid-column: 1 / -1;
+    margin: 10px auto 18px auto;
+    background: #b00;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* ==========================================================
+   UNIFORME CRUD TABEL (voor alle overzichten)
+   ========================================================== */
+.bas-tabel {
+    width: 98%;
+    max-width: 1100px;
+    margin: 0 auto 40px auto;
+    border-collapse: collapse;
+    background: #fff;
+    color: #b00;
+    font-size: 1.1em;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px #900;
+}
+
+.bas-tabel th,
+.bas-tabel td {
+    border: 2.5px solid #b00;
+    padding: 10px 8px;
+    text-align: center;
+    background: #ffeaea;
+}
+
+.bas-tabel th {
+    background: #ff2222;
+    color: #fff;
+    font-size: 1.05em;
+    border-bottom: 4px solid #b00;
+}
+
+.bas-tabel tr:nth-child(even) {
+    background: #fff6f6;
+}
+
+.bas-tabel tr:hover {
+    background: #ffd6d6;
+}
+
+/* Uniforme knoppen in tabellen */
+.bas-tabel-btn {
+    background: #ff2222;
+    border: none;
+    outline: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1em;
+    margin: 2px 0;
+}
+
+.bas-tabel-btn:hover {
+    background: #b00;
+    color: #ffd700;
 }

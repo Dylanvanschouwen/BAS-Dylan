@@ -5,7 +5,7 @@
 // Autoloader classes via composer
 require '../../vendor/autoload.php';
 use Bas\classes\inkooporders;
-
+ 
 if(isset($_POST["verwijderen"])){
 	
 	// Maak een object inkooporders

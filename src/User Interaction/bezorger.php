@@ -10,7 +10,7 @@ require_once '../classes/verkooporders.php';
 use Bas\classes\verkooporders;
 
 if (!isset($_SESSION['rol']) || strtolower($_SESSION['rol']) !== 'bezorger') {
-    header("Location: ../Login.php");
+    header("Location: ..User interaction/Login.php");
     exit;
 }
 
@@ -28,9 +28,9 @@ $orders = $verkOrdObj->getOrdersWithKlantInfo();
 
 require_once '../Includes/header.php';
 ?>
-<main class="bezorger-main">
+<main class="bas-main">
     <div class="formulier-container">
-        <h2 class="formulier-title bezorger-title">Verkooporders voor bezorging</h2>
+        <h2 class="bas-main-title">Verkooporders voor bezorging</h2>
         <?php if (isset($_GET['success'])): ?>
             <div id="verwijder-melding">Status succesvol aangepast!</div>
         <?php endif; ?>
@@ -38,7 +38,7 @@ require_once '../Includes/header.php';
         <form method="get" class="bezorger-klant-zoek">
             <label for="zoekKlantId">Zoek klant op ID:</label>
             <input type="number" name="zoekKlantId" id="zoekKlantId" class="formulier-input" min="1" placeholder="Klant-ID" value="<?= isset($_GET['zoekKlantId']) ? htmlspecialchars($_GET['zoekKlantId']) : '' ?>">
-            <button type="submit" class="artikel-btn">Zoek</button>
+            <button type="submit" class="bas-tabel-btn">Zoek</button>
         </form>
 
         <?php
@@ -63,7 +63,7 @@ require_once '../Includes/header.php';
         }
         ?>
 
-        <table class="bezorger-tabel">
+        <table class="bas-tabel">
             <tr>
                 <th>OrderID</th>
                 <th>Klantnaam</th>
@@ -94,7 +94,7 @@ require_once '../Includes/header.php';
                                 <option value="3" <?= $order['verkOrdStatus']==3?'selected':''; ?>>Afgeleverd</option>
                                 <option value="4" <?= $order['verkOrdStatus']==4?'selected':''; ?>>Geannuleerd</option>
                             </select>
-                            <button type="submit" class="artikel-btn">Opslaan</button>
+                            <button type="submit" class="bas-tabel-btn">Opslaan</button>
                         </form>
                     </td>
                 </tr>

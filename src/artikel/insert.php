@@ -10,6 +10,25 @@ use Bas\classes\artikel;
 
 $melding = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $rol = $_SESSION['rol'] ?? '';
+    // Check of op 'Terug' is geklikt
+    if (isset($_POST['terug'])) {
+        if ($rol === 'magazijnmedewerker') {
+            header("Location: ../User Interaction/magazijn-medewerker-menu.php");
+        } elseif ($rol === 'magazijnmeester') {
+            header("Location: ../User Interaction/magazijn-meester.php");
+        } elseif ($rol === 'inkoper') {
+            header("Location: ../User Interaction/inkoper-menu.php");
+        } elseif ($rol === 'verkoper') {
+            header("Location: ../User Interaction/verkoper-menu.php");
+        } elseif ($rol === 'admin') {
+            header("Location: ../User Interaction/admin-menu.php");
+        } else {
+            header("Location: ../index.php");
+        }
+        exit;
+    }
+
     $artikelObj = new artikel();
     $data = [
         'artOmschrijving'   => $_POST['artOmschrijving'],
@@ -21,15 +40,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'artLocatie'        => $_POST['artLocatie']
     ];
     if ($artikelObj->insertArtikel($data)) {
-        $rol = $_SESSION['rol'] ?? '';
-        if ($rol === 'magazijnmeester') {
-            header("Location: ../User-Interaction/Magazijn-meester.php?success=1");
-        } elseif ($rol === 'inkoopmedewerker') {
-            header("Location: ../User-Interaction/Inkoop-medewerker.php?success=1");
-        } elseif ($rol === 'verkoopmedewerker') {
-            header("Location: ../User-Interaction/Verkoop-medewerker.php?success=1");
+        if ($rol === 'magazijnmedewerker') {
+            header("Location: ../User Interaction/magazijn-medewerker-menu.php?success=1");
+        } elseif ($rol === 'magazijnmeester') {
+            header("Location: ../User Interaction/magazijn-meester.php?success=1");
+        } elseif ($rol === 'inkoper') {
+            header("Location: ../User Interaction/inkoper-menu.php?success=1");
+        } elseif ($rol === 'verkoper') {
+            header("Location: ../User Interaction/verkoper-menu.php?success=1");
         } elseif ($rol === 'admin') {
-            header("Location: ../User-Interaction/Admin.php?success=1");
+            header("Location: ../User Interaction/admin-menu.php?success=1");
         } else {
             header("Location: ../index.php?success=1");
         }
@@ -45,12 +65,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <main>
     <div class="formulier-container">
         <form method="post" class="formulier-grid">
-            <h2 class="formulier-title" style="grid-column: 1 / -1;">Artikel toevoegen</h2>
+            <h2 class="formulier-title">Artikel toevoegen</h2>
             <?php if ($melding): ?>
-                <div id="verwijder-melding" style="display:block;grid-column:1/-1;"><?= $melding ?></div>
+                <div id="verwijder-melding"><?= $melding ?></div>
             <?php endif; ?>
             <?php if (isset($_GET['success'])): ?>
-                <div id="verwijder-melding" style="display:block;">Artikel succesvol toegevoegd!</div>
+                <div id="verwijder-melding">Artikel succesvol toegevoegd!</div>
             <?php endif; ?>
             <label class="formulier-label" for="artOmschrijving">Artikel omschrijving</label>
             <input class="formulier-input" type="text" id="artOmschrijving" name="artOmschrijving" required>
@@ -73,12 +93,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label class="formulier-label" for="artLocatie">Artikel locatie</label>
             <input class="formulier-input" type="text" id="artLocatie" name="artLocatie" required>
 
-            <div class="formulier-btns" style="grid-column: 1 / -1;">
-                <button type="submit" class="artikel-btn">Toevoegen</button>
-                <a href="../User-Interaction/Magazijn-meester.php" class="artikel-btn">Terug</a>
+            <div class="formulier-btns">
+                <button type="submit" name="toevoegen" class="bas-tabel-btn">Toevoegen</button>
+                <button type="button" id="terugBtn" class="bas-tabel-btn">Terug</button>
             </div>
         </form>
     </div>
 </main>
+
+<script>
+document.getElementById('terugBtn').onclick = function() {
+    <?php
+    $rol = $_SESSION['rol'] ?? '';
+    if ($rol === 'magazijnmedewerker') {
+        $url = "../User Interaction/magazijn-medewerker-menu.php";
+    } elseif ($rol === 'magazijnmeester') {
+        $url = "../User Interaction/magazijn-meester.php";
+    } elseif ($rol === 'inkoper') {
+        $url = "../User Interaction/inkoper-menu.php";
+    } elseif ($rol === 'verkoper') {
+        $url = "../User Interaction/verkoper-menu.php";
+    } elseif ($rol === 'admin') {
+        $url = "../User Interaction/admin-menu.php";
+    } else {
+        $url = "../index.php";
+    }
+    ?>
+    window.location.href = "<?= $url ?>";
+};
+</script>
 
 <?php require_once '../Includes/footer.php'; ?>

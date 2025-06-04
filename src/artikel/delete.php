@@ -12,10 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['artId'])) {
 	$artikelObj = new artikel();
 	$deleted = $artikelObj->deleteArtikel((int)$_POST['artId']);
 	if ($deleted) {
-		echo 'success';
+		header("Location: read.php?success=1");
+		exit;
 	} else {
-		echo 'constraint'; // Speciaal voor constraint errors
+		header("Location: read.php?error=1");
+		exit;
 	}
-} else {
-	echo 'invalid';
 }

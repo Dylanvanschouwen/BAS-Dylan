@@ -4,7 +4,7 @@
 
 session_start();
 if (!isset($_SESSION['rol']) || strtolower($_SESSION['rol']) !== 'magazijnmeester') {
-    header("Location: ../Login.php");
+    header("Location: ../User Interaction/Login.php");
     exit;
 }
 require_once '../Includes/header.php';
@@ -27,17 +27,17 @@ if ($zoekOmschrijving !== '') {
 }
 ?>
 
-<main id="magazijn-meester-main">
+<main class="bas-main">
     <div class="artikel-zoek-container">
         <form method="get" class="artikel-zoek-form">
             <input type="text" name="zoekId" placeholder="Zoek op artikel-ID" value="<?= htmlspecialchars($zoekId) ?>">
             <input type="text" name="zoekOmschrijving" placeholder="Zoek op omschrijving" value="<?= htmlspecialchars($zoekOmschrijving) ?>">
-            <button type="submit" class="artikel-btn">Zoeken</button>
-            <a href="Magazijn-meester.php" class="artikel-btn">Reset</a>
+            <button type="submit" class="bas-tabel-btn"n"n"n"n">Zoeken</button>
+            <a href="Magazijn-meester.php" class="bas-tabel-btn">Reset</a>
         </form>
         <a href="../artikel/insert.php" class="artikel-toevoegen-btn">Artikel toevoegen</a>
     </div>
-    <table class="artikel-tabel">
+    <table class="bas-tabel">
         <thead>
             <tr>
                 <th>ID</th>
@@ -64,7 +64,7 @@ if ($zoekOmschrijving !== '') {
                 <td><?= $artikel['artMaxVoorraad'] ?></td>
                 <td><?= $artikel['artLocatie'] ?></td>
                 <td>
-                    <a href="../artikel/update.php?artId=<?= $artikel['artId'] ?>" class="artikel-btn">Wijzig</a>
+                    <a href="../artikel/update.php?artId=<?= $artikel['artId'] ?>" class="bas-tabel-btn">Wijzig</a>
                 </td>
                 <td>
                     <button type="button" class="artikel-btn artikel-verwijder-btn" data-id="<?= $artikel['artId'] ?>">Verwijder</button>

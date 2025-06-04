@@ -12,6 +12,25 @@ $artikelObj = new artikel();
 $melding = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['artId'])) {
+    $rol = $_SESSION['rol'] ?? '';
+    if (isset($_POST['terug'])) {
+        if ($rol === 'magazijnmedewerker') {
+            header("Location: ../User Interaction/magazijn-medewerker-menu.php");
+        } elseif ($rol === 'magazijnmeester') {
+            header("Location: ../User Interaction/magazijn-meester.php");
+        } elseif ($rol === 'inkoper') {
+            header("Location: ../User Interaction/inkoper-menu.php");
+        } elseif ($rol === 'verkoper') {
+            header("Location: ../User Interaction/verkoper-menu.php");
+        } elseif ($rol === 'admin') {
+            header("Location: ../User Interaction/admin-menu.php");
+        } else {
+            header("Location: ../index.php");
+        }
+        exit;
+    }
+
+    // Normale update-flow
     $data = [
         'artOmschrijving'   => $_POST['artOmschrijving'],
         'artInkoop'         => $_POST['artInkoop'],
@@ -22,13 +41,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['artId'])) {
         'artLocatie'        => $_POST['artLocatie']
     ];
     if ($artikelObj->updateArtikel((int)$_POST['artId'], $data)) {
-        header("Location: ../User-Interaction/Magazijn-meester.php?update=success");
+        if ($rol === 'magazijnmedewerker') {
+            header("Location: ../User Interaction/magazijn-medewerker-menu.php");
+        } elseif ($rol === 'magazijnmeester') {
+            header("Location: ../User Interaction/magazijn-meester.php");
+        } elseif ($rol === 'inkoper') {
+            header("Location: ../User Interaction/inkoper-menu.php");
+        } elseif ($rol === 'verkoper') {
+            header("Location: ../User Interaction/verkoper-menu.php");
+        } elseif ($rol === 'admin') {
+            header("Location: ../User Interaction/admin-menu.php");
+        } else {
+            header("Location: ../index.php");
+        }
         exit;
     } else {
         $melding = "Wijzigen mislukt!";
     }
 }
 
+// Ophalen van artikelgegevens
 if (isset($_GET['artId'])) {
     $row = $artikelObj->zoekOpId((int)$_GET['artId']);
     if ($row && isset($row[0])) {
@@ -48,9 +80,9 @@ if (isset($_GET['artId'])) {
 <main>
     <div class="formulier-container">
         <form method="post" class="formulier-grid">
-            <h2 class="formulier-title" style="grid-column: 1 / -1;">Artikel wijzigen</h2>
+            <h2 class="formulier-title">Artikel wijzigen</h2>
             <?php if ($melding): ?>
-                <div id="verwijder-melding" style="display:block;grid-column:1/-1;"><?= $melding ?></div>
+                <div id="verwijder-melding"><?= $melding ?></div>
             <?php endif; ?>
             <input type="hidden" name="artId" value="<?= htmlspecialchars($artikel['artId']) ?>">
 
@@ -75,9 +107,9 @@ if (isset($_GET['artId'])) {
             <label class="formulier-label" for="artLocatie">Artikel locatie</label>
             <input class="formulier-input" type="text" id="artLocatie" name="artLocatie" value="<?= htmlspecialchars($artikel['artLocatie']) ?>" required>
 
-            <div class="formulier-btns" style="grid-column: 1 / -1;">
-                <button type="submit" class="artikel-btn">Wijzigen</button>
-                <a href="../User-Interaction/Magazijn-meester.php" class="artikel-btn">Terug</a>
+            <div class="formulier-btns">
+                <button type="submit" name="wijzigen" class="bas-tabel-btn">Wijzigen</button>
+                <button type="submit" name="terug" class="bas-tabel-btn">Terug</button>
             </div>
         </form>
     </div>

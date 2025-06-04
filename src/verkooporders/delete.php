@@ -1,23 +1,19 @@
 <?php 
 // auteur: Dylan van schouwen
-// functie: 
+// functie: verkooporder verwijderen
 
 // Autoloader classes via composer
 require '../../vendor/autoload.php';
 use Bas\classes\verkooporders;
 
-if(isset($_POST["verwijderen"])){
-	
-	// Maak een object verkooporders
-	
-	
-	// Delete verkooporders op basis van NR
-	
-
-	echo '<script>alert("verkooporders verwijderd")</script>';
-	echo "<script> location.replace('read.php'); </script>";
+if(isset($_POST["verkoopordersId"])){
+    $verkoopordersObj = new verkooporders();
+    $verkoopordersObj->deleteVerkooporder((int)$_POST["verkoopordersId"]);
+    echo '<script>alert("Verkooporder verwijderd")</script>';
+    echo "<script> location.replace('read.php'); </script>";   echo "<script> location.replace('read.php'); </script>";
+    exit;
 }
-?>
+?>?>
 
 
 
