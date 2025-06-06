@@ -1,6 +1,6 @@
 <?php
 // auteur: Dylan van schouwen
-// functie: 
+// functie: delete class artikel 
 
 // Autoloader classes via composer
 require '../../vendor/autoload.php';

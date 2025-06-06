@@ -41,31 +41,31 @@
 ?>
 
 <main class="bas-main">
-    <div class="bas-formulier-container">
-        <form method="post" class="bas-formulier-grid">
-            <h2 class="bas-formulier-title">Klant wijzigen</h2>
+    <div class="crud-form-container">
+        <form method="post" class="crud-form-grid">
+            <h2 class="crud-form-title">Klant wijzigen</h2>
             <?php if ($melding): ?>
-                <div class="bas-formulier-melding"><?= htmlspecialchars($melding) ?></div>
+                <div class="crud-form-message"><?= htmlspecialchars($melding) ?></div>
             <?php endif; ?>
 
-            <label class="bas-formulier-label" for="klantNaam">Naam</label>
-            <input class="bas-formulier-input" type="text" id="klantNaam" name="klantNaam" value="<?= htmlspecialchars($row['klantNaam']) ?>" required>
+            <label class="crud-form-label" for="klantNaam">Naam</label>
+            <input class="crud-form-input" type="text" id="klantNaam" name="klantNaam" value="<?= htmlspecialchars($row['klantNaam']) ?>" required>
 
-            <label class="bas-formulier-label" for="klantEmail">Email</label>
-            <input class="bas-formulier-input" type="email" id="klantEmail" name="klantEmail" value="<?= htmlspecialchars($row['klantEmail']) ?>" required>
+            <label class="crud-form-label" for="klantEmail">Email</label>
+            <input class="crud-form-input" type="email" id="klantEmail" name="klantEmail" value="<?= htmlspecialchars($row['klantEmail']) ?>" required>
 
-            <label class="bas-formulier-label" for="klantAdres">Adres</label>
-            <input class="bas-formulier-input" type="text" id="klantAdres" name="klantAdres" value="<?= htmlspecialchars($row['klantAdres']) ?>" required>
+            <label class="crud-form-label" for="klantAdres">Adres</label>
+            <input class="crud-form-input" type="text" id="klantAdres" name="klantAdres" value="<?= htmlspecialchars($row['klantAdres']) ?>" required>
 
-            <label class="bas-formulier-label" for="klantPostcode">Postcode</label>
-            <input class="bas-formulier-input" type="text" id="klantPostcode" name="klantPostcode" value="<?= htmlspecialchars($row['klantPostcode']) ?>" required>
+            <label class="crud-form-label" for="klantPostcode">Postcode</label>
+            <input class="crud-form-input" type="text" id="klantPostcode" name="klantPostcode" value="<?= htmlspecialchars($row['klantPostcode']) ?>" required>
 
-            <label class="bas-formulier-label" for="klantWoonplaats">Woonplaats</label>
-            <input class="bas-formulier-input" type="text" id="klantWoonplaats" name="klantWoonplaats" value="<?= htmlspecialchars($row['klantWoonplaats']) ?>" required>
+            <label class="crud-form-label" for="klantWoonplaats">Woonplaats</label>
+            <input class="crud-form-input" type="text" id="klantWoonplaats" name="klantWoonplaats" value="<?= htmlspecialchars($row['klantWoonplaats']) ?>" required>
 
-            <div class="bas-formulier-btns">
-                <input type="submit" name="update" value="Wijzigen" class="bas-tabel-btn">
-                <a href="read.php" class="bas-tabel-btn">Terug</a>
+            <div class="crud-form-btns">
+                <button type="submit" name="update" class="crud-form-btn">Wijzigen</button>
+                <a href="read.php" class="crud-form-btn">Terug</a>
             </div>
         </form>
     </div>

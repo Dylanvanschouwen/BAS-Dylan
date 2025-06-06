@@ -97,4 +97,33 @@ class verkooporders extends Database
             ':verkOrdId' => $verkOrdId
         ]);
     }
+    public function zoekOpOrderId(int $verkOrdId) {
+        $sql = "SELECT v.*, k.klantNaam, k.klantAdres, k.klantWoonplaats, k.klantPostcode
+                FROM verkooporder v
+                JOIN klant k ON v.klantId = k.klantId
+                WHERE v.verkOrdId = :id";
+        $stmt = self::$conn->prepare($sql);
+        $stmt->execute(['id' => $verkOrdId]);
+        return $stmt->fetchAll();
+    }
+
+    public function zoekOpKlantId(int $klantId) {
+        $sql = "SELECT v.*, k.klantNaam, k.klantAdres, k.klantWoonplaats, k.klantPostcode
+                FROM verkooporder v
+                JOIN klant k ON v.klantId = k.klantId
+                WHERE v.klantId = :klantId";
+        $stmt = self::$conn->prepare($sql);
+        $stmt->execute(['klantId' => $klantId]);
+        return $stmt->fetchAll();
+    }
+
+    public function zoekOpDatum(string $datum) {
+        $sql = "SELECT v.*, k.klantNaam, k.klantAdres, k.klantWoonplaats, k.klantPostcode
+                FROM verkooporder v
+                JOIN klant k ON v.klantId = k.klantId
+                WHERE v.verkOrdDatum = :datum";
+        $stmt = self::$conn->prepare($sql);
+        $stmt->execute(['datum' => $datum]);
+        return $stmt->fetchAll();
+    }
 }

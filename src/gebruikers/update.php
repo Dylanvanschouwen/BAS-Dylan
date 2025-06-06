@@ -1,52 +1,69 @@
 <?php
     // auteur: Dylan van schouwen
-    // functie: update class gebruikers
+    // functie: gebruiker wijzigen
 
-    // Autoloader classes via composer
     require '../../vendor/autoload.php';
     use Bas\classes\gebruikers;
-    
-    $gebruikers = new gebruikers;
 
-    if(isset($_POST["update"]) && $_POST["update"] == "Wijzigen"){
+    $gebruikersObj = new gebruikers();
+    $melding = '';
 
-        // Code voor een update
-        
-    }
-
-    if (isset($_GET['gebruikersId'])){
-        $row = $gebruikers->getgebruikers($_GET['gebruikersId']);
-
-
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crud</title>
-    <link rel="stylesheet" href="../style.css">
-</head>
-<body>
-<h1>CRUD gebruikers</h1>
-<h2>Wijzigen</h2>	
-<form method="post">
-<input type="hidden" name="gebruikersId" 
-    value="<?php if(isset($row)) { echo $row['gebruikersId']; } ?>">
-<input type="text" name="gebruikersnaam" required 
-    value="<?php if(isset($row)) {echo $row['gebruikersNaam']; }?>"> *</br>
-<input type="text" name="gebruikersemail" required 
-    value="<?php if(isset($row)) {echo $row["gebruikersEmail"]; }?>"> *</br></br>
-<input type="submit" name="update" value="Wijzigen">
-</form></br>
-
-<a href="read.php">Terug</a>
-
-</body>
-</html>
-
-<?php
+    if (isset($_GET['gebruikersId'])) {
+        $gebruikersId = (int)$_GET['gebruikersId'];
+        $row = $gebruikersObj->getGebruikerById($gebruikersId);
+        if (!$row) {
+            header("Location: read.php");
+            exit;
+        }
     } else {
-        echo "Geen gebruikersId opgegeven<br>";
+        header("Location: read.php");
+        exit;
     }
+
+    if (isset($_POST['update'])) {
+        $data = [
+            'gebruikersnaam' => $_POST['gebruikersnaam'],
+            'rol'            => $_POST['rol']
+        ];
+
+        if (!empty($_POST['wachtwoord'])) {
+            $data['wachtwoord'] = password_hash($_POST['wachtwoord'], PASSWORD_DEFAULT);
+        }
+
+        if ($gebruikersObj->updateGebruiker($gebruikersId, $data)) {
+            header("Location: read.php?success=1");
+            exit;
+        } else {
+            $melding = "Wijzigen mislukt!";
+        }
+    }
+
+    require_once '../Includes/header.php';
 ?>
+
+<main class="bas-main">
+    <div class="crud-form-container">
+        <form method="post" class="crud-form-grid">
+            <h2 class="crud-form-title">Gebruiker wijzigen</h2>
+            <?php if ($melding): ?>
+                <div class="crud-form-message"><?= htmlspecialchars($melding) ?></div>
+            <?php endif; ?>
+
+            <label class="crud-form-label" for="gebruikersnaam">Gebruikersnaam</label>
+            <input class="crud-form-input" type="text" id="gebruikersnaam" name="gebruikersnaam" value="<?= htmlspecialchars($row['gebruikersnaam']) ?>" required>
+
+            <label class="crud-form-label" for="rol">Rol</label>
+            <input class="crud-form-input" type="text" id="rol" name="rol" value="<?= htmlspecialchars($row['rol']) ?>" required>
+
+            <label class="crud-form-label" for="wachtwoord">Nieuw wachtwoord (optioneel)</label>
+            <input class="crud-form-input" type="password" id="wachtwoord" name="wachtwoord" autocomplete="new-password">
+
+            <div class="crud-form-btns">
+                <button type="submit" name="update" class="crud-form-btn">Wijzigen</button>
+                <a href="read.php" class="crud-form-btn">Terug</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+<?php require_once '../Includes/footer.php'; ?>

@@ -1,6 +1,6 @@
 <?php
 // auteur: Dylan van schouwen
-// functie: Overzicht artikelen voor magazijnmedewerker
+// functie: read class artikel
 
 session_start();
 require '../../vendor/autoload.php';
@@ -10,7 +10,6 @@ use Bas\classes\artikel;
 
 $artikelObj = new artikel();
 
-// Zoekfunctionaliteit
 $zoekId = isset($_GET['zoekId']) ? trim($_GET['zoekId']) : '';
 $zoekOmschrijving = isset($_GET['zoekOmschrijving']) ? trim($_GET['zoekOmschrijving']) : '';
 
@@ -26,14 +25,14 @@ require_once '../Includes/header.php';
 ?>
 
 <main class="bas-main">
-    <div class="artikel-zoek-container">
-        <form method="get" class="artikel-zoek-form">
-            <input type="number" name="zoekId" class="formulier-input" placeholder="Zoek op artikel-ID" value="<?= htmlspecialchars($zoekId) ?>">
-            <input type="text" name="zoekOmschrijving" class="formulier-input" placeholder="Zoek op omschrijving" value="<?= htmlspecialchars($zoekOmschrijving) ?>">
-            <button type="submit" class="bas-tabel-btn">Zoek</button>
-            <a href="read.php" class="bas-tabel-btn">Reset</a>
+    <div class="crud-searchbar-container">
+        <form method="get" class="crud-searchbar-form">
+            <input type="number" name="zoekId" class="crud-searchbar-input" placeholder="Zoek op artikel-ID" value="<?= htmlspecialchars($zoekId) ?>">
+            <input type="text" name="zoekOmschrijving" class="crud-searchbar-input" placeholder="Zoek op omschrijving" value="<?= htmlspecialchars($zoekOmschrijving) ?>">
+            <button type="submit" class="crud-searchbar-btn">Zoek</button>
+            <a href="read.php" class="crud-searchbar-btn">Reset</a>
         </form>
-        <a href="insert.php" class="artikel-toevoegen-btn">Artikel toevoegen</a>
+        <a href="insert.php" class="crud-add-btn">Artikel toevoegen</a>
     </div>
     <table class="bas-tabel">
         <thead>

@@ -10,12 +10,28 @@ require_once '../classes/verkooporders.php';
 use Bas\classes\verkooporders;
 
 if (!isset($_SESSION['rol']) || strtolower($_SESSION['rol']) !== 'bezorger') {
-    header("Location: ..User interaction/Login.php");
+    header("Location: ../User Interaction/Login.php");
     exit;
 }
 
 $verkOrdObj = new verkooporders();
 
+// Zoekfunctionaliteit
+$zoekOrderId = isset($_GET['zoekOrderId']) ? trim($_GET['zoekOrderId']) : '';
+$zoekKlantId = isset($_GET['zoekKlantId']) ? trim($_GET['zoekKlantId']) : '';
+$zoekDatum   = isset($_GET['zoekDatum']) ? trim($_GET['zoekDatum']) : '';
+
+if ($zoekOrderId !== '') {
+    $orders = $verkOrdObj->zoekOpOrderId((int)$zoekOrderId);
+} elseif ($zoekKlantId !== '') {
+    $orders = $verkOrdObj->zoekOpKlantId((int)$zoekKlantId);
+} elseif ($zoekDatum !== '') {
+    $orders = $verkOrdObj->zoekOpDatum($zoekDatum);
+} else {
+    $orders = $verkOrdObj->getOrdersWithKlantInfo();
+}
+
+// Status aanpassen
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verkOrdId'], $_POST['verkOrdStatus'])) {
     $verkOrdId = (int)$_POST['verkOrdId'];
     $status = (int)$_POST['verkOrdStatus'];
@@ -24,46 +40,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verkOrdId'], $_POST['
     exit;
 }
 
-$orders = $verkOrdObj->getOrdersWithKlantInfo();
-
 require_once '../Includes/header.php';
 ?>
+
 <main class="bas-main">
-    <div class="formulier-container">
-        <h2 class="bas-main-title">Verkooporders voor bezorging</h2>
-        <?php if (isset($_GET['success'])): ?>
-            <div id="verwijder-melding">Status succesvol aangepast!</div>
-        <?php endif; ?>
-
-        <form method="get" class="bezorger-klant-zoek">
-            <label for="zoekKlantId">Zoek klant op ID:</label>
-            <input type="number" name="zoekKlantId" id="zoekKlantId" class="formulier-input" min="1" placeholder="Klant-ID" value="<?= isset($_GET['zoekKlantId']) ? htmlspecialchars($_GET['zoekKlantId']) : '' ?>">
-            <button type="submit" class="bas-tabel-btn">Zoek</button>
+    <div class="crud-searchbar-container">
+        <form method="get" class="crud-searchbar-form">
+            <input type="number" name="zoekOrderId" class="crud-searchbar-input" placeholder="Zoek op OrderID" value="<?= htmlspecialchars($zoekOrderId) ?>">
+            <input type="number" name="zoekKlantId" class="crud-searchbar-input" placeholder="Zoek op Klantnummer" value="<?= htmlspecialchars($zoekKlantId) ?>">
+            <input type="date" name="zoekDatum" class="crud-searchbar-input" placeholder="Zoek op Datum" value="<?= htmlspecialchars($zoekDatum) ?>">
+            <button type="submit" class="crud-searchbar-btn">Zoek</button>
+            <a href="bezorger.php" class="crud-searchbar-btn">Reset</a>
         </form>
+    </div>
+    <?php if (isset($_GET['success'])): ?>
+        <div class="crud-form-message" id="verwijder-melding">Status succesvol aangepast!</div>
+    <?php endif; ?>
 
-        <?php
-        if (isset($_GET['zoekKlantId']) && is_numeric($_GET['zoekKlantId'])) {
-            require_once '../classes/klant.php';
-            $klantObj = new \Bas\classes\Klant();
-            $klant = $klantObj->getKlantById((int)$_GET['zoekKlantId']);
-            if ($klant) {
-                echo "<div class='bezorger-klant-info'>";
-                echo "<strong>Klant-ID:</strong> " . htmlspecialchars($klant['klantId']) . "<br>";
-                echo "<strong>Naam:</strong> " . htmlspecialchars($klant['klantNaam']) . "<br>";
-                echo "<strong>Adres:</strong> " . htmlspecialchars($klant['klantAdres']) . "<br>";
-                echo "<strong>Postcode:</strong> " . htmlspecialchars($klant['klantPostcode']) . "<br>";
-                echo "<strong>Woonplaats:</strong> " . htmlspecialchars($klant['klantWoonplaats']) . "<br>";
-                echo "<strong>Email:</strong> " . htmlspecialchars($klant['klantEmail']) . "<br>";
-                echo "</div>";
-            } else {
-                echo "<div class='bezorger-klant-info'>";
-                echo "Geen klant gevonden met ID " . htmlspecialchars($_GET['zoekKlantId']) . ".";
-                echo "</div>";
-            }
-        }
-        ?>
-
-        <table class="bas-tabel">
+    <table class="bas-tabel">
+        <thead>
             <tr>
                 <th>OrderID</th>
                 <th>Klantnaam</th>
@@ -75,6 +70,13 @@ require_once '../Includes/header.php';
                 <th>Status</th>
                 <th>Status aanpassen</th>
             </tr>
+        </thead>
+        <tbody>
+        <?php if (empty($orders)): ?>
+            <tr>
+                <td colspan="9">Geen verkooporders gevonden.</td>
+            </tr>
+        <?php else: ?>
             <?php foreach ($orders as $order): ?>
                 <tr>
                     <td><?= htmlspecialchars($order['verkOrdId']) ?></td>
@@ -86,9 +88,9 @@ require_once '../Includes/header.php';
                     <td><?= htmlspecialchars($order['verkOrdBestAantal']) ?></td>
                     <td><?= htmlspecialchars($verkOrdObj->statusText($order['verkOrdStatus'])) ?></td>
                     <td>
-                        <form method="post" class="bezorger-status-form">
+                        <form method="post" class="bezorger-status-form" style="display:flex;gap:8px;align-items:center;">
                             <input type="hidden" name="verkOrdId" value="<?= $order['verkOrdId'] ?>">
-                            <select name="verkOrdStatus" class="formulier-input">
+                            <select name="verkOrdStatus" class="crud-searchbar-input" style="min-width:140px;">
                                 <option value="1" <?= $order['verkOrdStatus']==1?'selected':''; ?>>In behandeling</option>
                                 <option value="2" <?= $order['verkOrdStatus']==2?'selected':''; ?>>Onderweg</option>
                                 <option value="3" <?= $order['verkOrdStatus']==3?'selected':''; ?>>Afgeleverd</option>
@@ -99,8 +101,9 @@ require_once '../Includes/header.php';
                     </td>
                 </tr>
             <?php endforeach; ?>
-        </table>
-    </div>
+        <?php endif; ?>
+        </tbody>
+    </table>
 </main>
 
 <?php require_once '../Includes/footer.php'; ?>

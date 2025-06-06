@@ -1,21 +1,19 @@
 <?php 
 // auteur: Dylan van schouwen
-// functie: 
+// functie: klant verwijderen
 
-// Autoloader classes via composer
 require '../../vendor/autoload.php';
 use Bas\classes\Klant;
 
-if(isset($_POST["verwijderen"])){
-	
-	// Maak een object Klant
-	
-	
-	// Delete Klant op basis van NR
-	
-
-	echo '<script>alert("Klant verwijderd")</script>';
-	echo "<script> location.replace('read.php'); </script>";
+if (isset($_POST["verwijderen"]) && isset($_POST["klantId"])) {
+    $klantObj = new Klant();
+    $klantId = (int)$_POST["klantId"];
+    $klantObj->deleteKlant($klantId);
+    header("Location: read.php?deleted=1");
+    exit;
+} else {
+    header("Location: read.php");
+    exit;
 }
 ?>
 

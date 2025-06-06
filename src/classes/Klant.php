@@ -133,4 +133,21 @@ class Klant extends Database
         $lijst = $this->getKlanten();
         $this->showTable($lijst);
     }
+
+    public function zoekOpNaam(string $naam): array
+    {
+        $sql = "SELECT * FROM $this->table_name WHERE klantNaam LIKE :naam";
+        $stmt = self::$conn->prepare($sql);
+        $stmt->execute(['naam' => '%' . $naam . '%']);
+        return $stmt->fetchAll();
+    }
+
+    public function zoekOpPostcode(string $postcode): array
+    {
+        $sql = "SELECT * FROM $this->table_name WHERE klantPostcode LIKE :postcode";
+        $stmt = self::$conn->prepare($sql);
+        $stmt->execute(['postcode' => '%' . $postcode . '%']);
+        return $stmt->fetchAll();
+    }
+
 }

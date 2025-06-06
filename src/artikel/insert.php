@@ -11,7 +11,6 @@ use Bas\classes\artikel;
 $melding = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $rol = $_SESSION['rol'] ?? '';
-    // Check of op 'Terug' is geklikt
     if (isset($_POST['terug'])) {
         if ($rol === 'magazijnmedewerker') {
             header("Location: ../User Interaction/magazijn-medewerker-menu.php");
@@ -62,40 +61,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php require_once '../Includes/header.php'; ?>
 
-<main>
-    <div class="formulier-container">
-        <form method="post" class="formulier-grid">
-            <h2 class="formulier-title">Artikel toevoegen</h2>
+<main class="bas-main">
+    <div class="crud-form-container">
+        <form method="post" class="crud-form-grid">
+            <h2 class="crud-form-title">Artikel toevoegen</h2>
             <?php if ($melding): ?>
-                <div id="verwijder-melding"><?= $melding ?></div>
+                <div class="crud-form-message"><?= htmlspecialchars($melding) ?></div>
             <?php endif; ?>
             <?php if (isset($_GET['success'])): ?>
-                <div id="verwijder-melding">Artikel succesvol toegevoegd!</div>
+                <div class="crud-form-message">Artikel succesvol toegevoegd!</div>
             <?php endif; ?>
-            <label class="formulier-label" for="artOmschrijving">Artikel omschrijving</label>
-            <input class="formulier-input" type="text" id="artOmschrijving" name="artOmschrijving" required>
 
-            <label class="formulier-label" for="artInkoop">Artikel inkoop</label>
-            <input class="formulier-input" type="number" step="0.01" id="artInkoop" name="artInkoop" required>
+            <label class="crud-form-label" for="artOmschrijving">Artikel omschrijving</label>
+            <input class="crud-form-input" type="text" id="artOmschrijving" name="artOmschrijving" required>
 
-            <label class="formulier-label" for="artVerkoop">Artikel verkoop</label>
-            <input class="formulier-input" type="number" step="0.01" id="artVerkoop" name="artVerkoop" required>
+            <label class="crud-form-label" for="artInkoop">Artikel inkoop</label>
+            <input class="crud-form-input" type="number" step="0.01" id="artInkoop" name="artInkoop" required>
 
-            <label class="formulier-label" for="artVoorraad">Artikel voorraad</label>
-            <input class="formulier-input" type="number" id="artVoorraad" name="artVoorraad" required>
+            <label class="crud-form-label" for="artVerkoop">Artikel verkoop</label>
+            <input class="crud-form-input" type="number" step="0.01" id="artVerkoop" name="artVerkoop" required>
 
-            <label class="formulier-label" for="artMinVoorraad">Artikel Min voorraad</label>
-            <input class="formulier-input" type="number" id="artMinVoorraad" name="artMinVoorraad" required>
+            <label class="crud-form-label" for="artVoorraad">Artikel voorraad</label>
+            <input class="crud-form-input" type="number" id="artVoorraad" name="artVoorraad" required>
 
-            <label class="formulier-label" for="artMaxVoorraad">Artikel Max voorraad</label>
-            <input class="formulier-input" type="number" id="artMaxVoorraad" name="artMaxVoorraad" required>
+            <label class="crud-form-label" for="artMinVoorraad">Artikel Min voorraad</label>
+            <input class="crud-form-input" type="number" id="artMinVoorraad" name="artMinVoorraad" required>
 
-            <label class="formulier-label" for="artLocatie">Artikel locatie</label>
-            <input class="formulier-input" type="text" id="artLocatie" name="artLocatie" required>
+            <label class="crud-form-label" for="artMaxVoorraad">Artikel Max voorraad</label>
+            <input class="crud-form-input" type="number" id="artMaxVoorraad" name="artMaxVoorraad" required>
 
-            <div class="formulier-btns">
-                <button type="submit" name="toevoegen" class="bas-tabel-btn">Toevoegen</button>
-                <button type="button" id="terugBtn" class="bas-tabel-btn">Terug</button>
+            <label class="crud-form-label" for="artLocatie">Artikel locatie</label>
+            <input class="crud-form-input" type="text" id="artLocatie" name="artLocatie" required>
+
+            <div class="crud-form-btns">
+                <button type="submit" name="toevoegen" class="crud-form-btn">Toevoegen</button>
+                <button type="button" id="terugBtn" class="crud-form-btn">Terug</button>
             </div>
         </form>
     </div>

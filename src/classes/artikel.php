@@ -81,7 +81,7 @@ class artikel extends Database {
                 // Foreign key constraint violation
                 return false;
             }
-            throw $e; // andere fouten opnieuw gooien
+            throw $e;
         }
     }
     // Zoek artikelen op ID

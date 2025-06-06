@@ -77,39 +77,39 @@ if (isset($_GET['artId'])) {
 
 <?php require_once '../Includes/header.php'; ?>
 
-<main>
-    <div class="formulier-container">
-        <form method="post" class="formulier-grid">
-            <h2 class="formulier-title">Artikel wijzigen</h2>
+<main class = "bas-main">
+    <div class="crud-form-container">
+        <form method="post" class="crud-form-grid">
+            <h2 class="crud-form-title">Artikel wijzigen</h2>
             <?php if ($melding): ?>
-                <div id="verwijder-melding"><?= $melding ?></div>
+                <div class="crud-form-message"><?= htmlspecialchars($melding) ?></div>
             <?php endif; ?>
             <input type="hidden" name="artId" value="<?= htmlspecialchars($artikel['artId']) ?>">
 
-            <label class="formulier-label" for="artOmschrijving">Artikel omschrijving</label>
-            <input class="formulier-input" type="text" id="artOmschrijving" name="artOmschrijving" value="<?= htmlspecialchars($artikel['artOmschrijving']) ?>" required>
+            <label class="crud-form-label" for="artOmschrijving">Artikel omschrijving</label>
+            <input class="crud-form-input" type="text" id="artOmschrijving" name="artOmschrijving" value="<?= htmlspecialchars($artikel['artOmschrijving']) ?>" required>
 
-            <label class="formulier-label" for="artInkoop">Artikel inkoop</label>
-            <input class="formulier-input" type="number" step="0.01" id="artInkoop" name="artInkoop" value="<?= htmlspecialchars($artikel['artInkoop']) ?>" required>
+            <label class="crud-form-label" for="artInkoop">Artikel inkoop</label>
+            <input class="crud-form-input" type="number" step="0.01" id="artInkoop" name="artInkoop" value="<?= htmlspecialchars($artikel['artInkoop']) ?>" required>
 
-            <label class="formulier-label" for="artVerkoop">Artikel verkoop</label>
-            <input class="formulier-input" type="number" step="0.01" id="artVerkoop" name="artVerkoop" value="<?= htmlspecialchars($artikel['artVerkoop']) ?>" required>
+            <label class="crud-form-label" for="artVerkoop">Artikel verkoop</label>
+            <input class="crud-form-input" type="number" step="0.01" id="artVerkoop" name="artVerkoop" value="<?= htmlspecialchars($artikel['artVerkoop']) ?>" required>
 
-            <label class="formulier-label" for="artVoorraad">Artikel voorraad</label>
-            <input class="formulier-input" type="number" id="artVoorraad" name="artVoorraad" value="<?= htmlspecialchars($artikel['artVoorraad']) ?>" required>
+            <label class="crud-form-label" for="artVoorraad">Artikel voorraad</label>
+            <input class="crud-form-input" type="number" id="artVoorraad" name="artVoorraad" value="<?= htmlspecialchars($artikel['artVoorraad']) ?>" required>
 
-            <label class="formulier-label" for="artMinVoorraad">Artikel Min voorraad</label>
-            <input class="formulier-input" type="number" id="artMinVoorraad" name="artMinVoorraad" value="<?= htmlspecialchars($artikel['artMinVoorraad']) ?>" required>
+            <label class="crud-form-label" for="artMinVoorraad">Artikel Min voorraad</label>
+            <input class="crud-form-input" type="number" id="artMinVoorraad" name="artMinVoorraad" value="<?= htmlspecialchars($artikel['artMinVoorraad']) ?>" required>
 
-            <label class="formulier-label" for="artMaxVoorraad">Artikel Max voorraad</label>
-            <input class="formulier-input" type="number" id="artMaxVoorraad" name="artMaxVoorraad" value="<?= htmlspecialchars($artikel['artMaxVoorraad']) ?>" required>
+            <label class="crud-form-label" for="artMaxVoorraad">Artikel Max voorraad</label>
+            <input class="crud-form-input" type="number" id="artMaxVoorraad" name="artMaxVoorraad" value="<?= htmlspecialchars($artikel['artMaxVoorraad']) ?>" required>
 
-            <label class="formulier-label" for="artLocatie">Artikel locatie</label>
-            <input class="formulier-input" type="text" id="artLocatie" name="artLocatie" value="<?= htmlspecialchars($artikel['artLocatie']) ?>" required>
+            <label class="crud-form-label" for="artLocatie">Artikel locatie</label>
+            <input class="crud-form-input" type="text" id="artLocatie" name="artLocatie" value="<?= htmlspecialchars($artikel['artLocatie']) ?>" required>
 
-            <div class="formulier-btns">
-                <button type="submit" name="wijzigen" class="bas-tabel-btn">Wijzigen</button>
-                <button type="submit" name="terug" class="bas-tabel-btn">Terug</button>
+            <div class="crud-form-btns">
+                <button type="submit" name="wijzigen" class="crud-form-btn">Wijzigen</button>
+                <button type="submit" name="terug" class="crud-form-btn">Terug</button>
             </div>
         </form>
     </div>

@@ -1,21 +1,19 @@
 <?php 
 // auteur: Dylan van schouwen
-// functie: 
+// functie: inkooporder verwijderen
 
-// Autoloader classes via composer
 require '../../vendor/autoload.php';
-use Bas\classes\inkooporders;
- 
-if(isset($_POST["verwijderen"])){
-	
-	// Maak een object inkooporders
-	
-	
-	// Delete inkooporders op basis van NR
-	
+use Bas\classes\inkooporder;
 
-	echo '<script>alert("inkooporders verwijderd")</script>';
-	echo "<script> location.replace('read.php'); </script>";
+if (isset($_POST["verwijderen"]) && isset($_POST["inkOrdId"])) {
+    $inkooporderObj = new inkooporder();
+    $inkOrdId = (int)$_POST["inkOrdId"];
+    $inkooporderObj->deleteInkooporder($inkOrdId);
+    header("Location: read.php?deleted=1");
+    exit;   exit;
+} else {
+    header("Location: read.php");   header("Location: read.php");
+    exit;    exit;
 }
 ?>
 

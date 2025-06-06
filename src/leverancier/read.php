@@ -11,9 +11,9 @@ $leverancierObj = new leverancier();
 
 $zoekId = isset($_GET['zoekId']) ? trim($_GET['zoekId']) : '';
 $zoekNaam = isset($_GET['zoekNaam']) ? trim($_GET['zoekNaam']) : '';
+$leveranciers = [];
 
 if ($zoekId !== '') {
-    $leveranciers = [];
     $row = $leverancierObj->zoekOpId((int)$zoekId);
     if ($row) $leveranciers[] = $row;
 } elseif ($zoekNaam !== '') {
@@ -26,14 +26,14 @@ require_once '../Includes/header.php';
 ?>
 
 <main class="bas-main">
-    <div class="leverancier-zoek-container">
-        <form method="get" class="bas-tabel-zoek-form">
-            <input type="number" name="zoekId" class="bas-tabel-input" placeholder="Zoek op leverancier-ID" value="<?= htmlspecialchars($zoekId) ?>">
-            <input type="text" name="zoekNaam" class="bas-tabel-input" placeholder="Zoek op naam" value="<?= htmlspecialchars($zoekNaam) ?>">
-            <button type="submit" class="bas-tabel-btn">Zoek</button>
-            <a href="read.php" class="bas-tabel-btn">Reset</a>
+    <div class="crud-searchbar-container">
+        <form method="get" class="crud-searchbar-form">
+            <input type="number" name="zoekId" class="crud-searchbar-input" placeholder="Zoek op leverancier-ID" value="<?= htmlspecialchars($zoekId) ?>">
+            <input type="text" name="zoekNaam" class="crud-searchbar-input" placeholder="Zoek op naam" value="<?= htmlspecialchars($zoekNaam) ?>">
+            <button type="submit" class="crud-searchbar-btn">Zoek</button>
+            <a href="read.php" class="crud-searchbar-btn">Reset</a>
         </form>
-        <a href="insert.php" class="bas-tabel-btn bas-tabel-actieknop">Leverancier toevoegen</a>
+        <a href="insert.php" class="crud-add-btn">Leverancier toevoegen</a>
     </div>
     <table class="bas-tabel">
         <thead>
@@ -44,7 +44,7 @@ require_once '../Includes/header.php';
                 <th>Email</th>
                 <th>Adres</th>
                 <th>Postcode</th>
-                <th>Plaats</th>
+                <th>Woonplaats</th>
                 <th>Wijzig</th>
                 <th>Verwijder</th>
             </tr>
@@ -70,7 +70,7 @@ require_once '../Includes/header.php';
                     <td>
                         <form method="post" action="delete.php" onsubmit="return confirm('Weet je zeker dat je deze leverancier wilt verwijderen?');">
                             <input type="hidden" name="levId" value="<?= $lev['levId'] ?>">
-                            <button type="submit" class="bas-tabel-btn">Verwijder</button>
+                            <button type="submit" name="verwijderen" class="bas-tabel-btn">Verwijder</button>
                         </form>
                     </td>
                 </tr>

@@ -1,6 +1,6 @@
 <?php
 // auteur: Dylan van Schouwen
-//functie: Magazijn-meester pagina
+// functie: Magazijn-meester pagina
 
 session_start();
 if (!isset($_SESSION['rol']) || strtolower($_SESSION['rol']) !== 'magazijnmeester') {
@@ -13,29 +13,29 @@ require_once '../classes/artikel.php';
 use Bas\classes\artikel;
 
 $artikelObj = new artikel();
-$artikelen = $artikelObj->getArtikelen();
 
 // Zoekfunctionaliteit
-$zoekId = $_GET['zoekId'] ?? '';
-$zoekOmschrijving = $_GET['zoekOmschrijving'] ?? '';
+$zoekId = isset($_GET['zoekId']) ? trim($_GET['zoekId']) : '';
+$zoekOmschrijving = isset($_GET['zoekOmschrijving']) ? trim($_GET['zoekOmschrijving']) : '';
 
 if ($zoekId !== '') {
-    $artikelen = array_filter($artikelen, fn($a) => $a['artId'] == $zoekId);
-}
-if ($zoekOmschrijving !== '') {
-    $artikelen = array_filter($artikelen, fn($a) => stripos($a['artOmschrijving'], $zoekOmschrijving) !== false);
+    $artikelen = $artikelObj->zoekOpId((int)$zoekId);
+} elseif ($zoekOmschrijving !== '') {
+    $artikelen = $artikelObj->zoekOpOmschrijving($zoekOmschrijving);
+} else {
+    $artikelen = $artikelObj->getArtikelen();
 }
 ?>
 
 <main class="bas-main">
-    <div class="artikel-zoek-container">
-        <form method="get" class="artikel-zoek-form">
-            <input type="text" name="zoekId" placeholder="Zoek op artikel-ID" value="<?= htmlspecialchars($zoekId) ?>">
-            <input type="text" name="zoekOmschrijving" placeholder="Zoek op omschrijving" value="<?= htmlspecialchars($zoekOmschrijving) ?>">
-            <button type="submit" class="bas-tabel-btn"n"n"n"n">Zoeken</button>
-            <a href="Magazijn-meester.php" class="bas-tabel-btn">Reset</a>
+    <div class="crud-searchbar-container">
+        <form method="get" class="crud-searchbar-form">
+            <input type="number" name="zoekId" class="crud-searchbar-input" placeholder="Zoek op artikel-ID" value="<?= htmlspecialchars($zoekId) ?>">
+            <input type="text" name="zoekOmschrijving" class="crud-searchbar-input" placeholder="Zoek op omschrijving" value="<?= htmlspecialchars($zoekOmschrijving) ?>">
+            <button type="submit" class="crud-searchbar-btn">Zoek</button>
+            <a href="magazijn-meester.php" class="crud-searchbar-btn">Reset</a>
         </form>
-        <a href="../artikel/insert.php" class="artikel-toevoegen-btn">Artikel toevoegen</a>
+        <a href="../artikel/insert.php" class="crud-add-btn">Artikel toevoegen</a>
     </div>
     <table class="bas-tabel">
         <thead>
@@ -53,33 +53,40 @@ if ($zoekOmschrijving !== '') {
             </tr>
         </thead>
         <tbody>
-        <?php foreach ($artikelen as $artikel): ?>
-            <tr id="row-<?= $artikel['artId'] ?>">
-                <td><?= $artikel['artId'] ?></td>
-                <td><?= htmlspecialchars($artikel['artOmschrijving']) ?></td>
-                <td><?= $artikel['artInkoop'] ?></td>
-                <td><?= $artikel['artVerkoop'] ?></td>
-                <td><?= $artikel['artVoorraad'] ?></td>
-                <td><?= $artikel['artMinVoorraad'] ?></td>
-                <td><?= $artikel['artMaxVoorraad'] ?></td>
-                <td><?= $artikel['artLocatie'] ?></td>
-                <td>
-                    <a href="../artikel/update.php?artId=<?= $artikel['artId'] ?>" class="bas-tabel-btn">Wijzig</a>
-                </td>
-                <td>
-                    <button type="button" class="artikel-btn artikel-verwijder-btn" data-id="<?= $artikel['artId'] ?>">Verwijder</button>
-                </td>
+        <?php if (empty($artikelen)): ?>
+            <tr>
+                <td colspan="10">Geen artikelen gevonden.</td>
             </tr>
-        <?php endforeach; ?>
+        <?php else: ?>
+            <?php foreach ($artikelen as $artikel): ?>
+                <tr id="row-<?= $artikel['artId'] ?>">
+                    <td><?= htmlspecialchars($artikel['artId']) ?></td>
+                    <td><?= htmlspecialchars($artikel['artOmschrijving']) ?></td>
+                    <td><?= htmlspecialchars($artikel['artInkoop']) ?></td>
+                    <td><?= htmlspecialchars($artikel['artVerkoop']) ?></td>
+                    <td><?= htmlspecialchars($artikel['artVoorraad']) ?></td>
+                    <td><?= htmlspecialchars($artikel['artMinVoorraad']) ?></td>
+                    <td><?= htmlspecialchars($artikel['artMaxVoorraad']) ?></td>
+                    <td><?= htmlspecialchars($artikel['artLocatie']) ?></td>
+                    <td>
+                        <a href="../artikel/update.php?artId=<?= $artikel['artId'] ?>" class="bas-tabel-btn">Wijzig</a>
+                    </td>
+                    <td>
+                        <button type="button" class="bas-tabel-btn artikel-verwijder-btn" data-id="<?= $artikel['artId'] ?>">Verwijder</button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
         </tbody>
     </table>
-    <div id="verwijder-melding" style="display:none;"></div>
+    <div id="verwijder-melding"></div>
 </main>
 
 <script>
 document.querySelectorAll('.artikel-verwijder-btn').forEach(btn => {
     btn.addEventListener('click', function() {
         const artId = this.dataset.id;
+        const melding = document.getElementById('verwijder-melding');
         if(confirm('Weet je zeker dat je dit artikel wilt verwijderen?')) {
             fetch('../artikel/delete.php', {
                 method: 'POST',
@@ -89,24 +96,18 @@ document.querySelectorAll('.artikel-verwijder-btn').forEach(btn => {
             .then(res => res.text())
             .then(data => {
                 if (data.trim() === 'constraint') {
-                    document.getElementById('verwijder-melding').textContent = 'Kan artikel niet verwijderen: het wordt nog gebruikt in een order.';
-                    document.getElementById('verwijder-melding').style.display = 'block';
-                    setTimeout(() => {
-                        document.getElementById('verwijder-melding').style.display = 'none';
-                    }, 4000);
+                    melding.textContent = 'Kan artikel niet verwijderen: het wordt nog gebruikt in een order.';
+                    melding.classList.add('zichtbaar');
+                    setTimeout(() => melding.classList.remove('zichtbaar'), 4000);
                 } else if (data.trim() === 'success') {
                     document.getElementById('row-' + artId).style.textDecoration = 'line-through';
-                    document.getElementById('verwijder-melding').textContent = 'Artikel verwijderd!';
-                    document.getElementById('verwijder-melding').style.display = 'block';
-                    setTimeout(() => {
-                        document.getElementById('verwijder-melding').style.display = 'none';
-                    }, 2000);
+                    melding.textContent = 'Artikel verwijderd!';
+                    melding.classList.add('zichtbaar');
+                    setTimeout(() => melding.classList.remove('zichtbaar'), 2000);
                 } else {
-                    document.getElementById('verwijder-melding').textContent = 'Verwijderen mislukt.';
-                    document.getElementById('verwijder-melding').style.display = 'block';
-                    setTimeout(() => {
-                        document.getElementById('verwijder-melding').style.display = 'none';
-                    }, 2000);
+                    melding.textContent = 'Verwijderen mislukt.';
+                    melding.classList.add('zichtbaar');
+                    setTimeout(() => melding.classList.remove('zichtbaar'), 2000);
                 }
             });
         }
