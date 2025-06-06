@@ -29,8 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['artId'])) {
         }
         exit;
     }
-
-    // Normale update-flow
     $data = [
         'artOmschrijving'   => $_POST['artOmschrijving'],
         'artInkoop'         => $_POST['artInkoop'],
@@ -60,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['artId'])) {
     }
 }
 
-// Ophalen van artikelgegevens
 if (isset($_GET['artId'])) {
     $row = $artikelObj->zoekOpId((int)$_GET['artId']);
     if ($row && isset($row[0])) {

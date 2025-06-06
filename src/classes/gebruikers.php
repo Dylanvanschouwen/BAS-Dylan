@@ -26,14 +26,14 @@ class gebruikers extends Database
         return $result ? $result : null;
     }
 
-    // Zoek gebruiker(s) op ID (retourneert array voor compatibiliteit met tabellen)
+    // Zoek gebruiker(s) op ID
     public function zoekOpId(int $gebruikersId): array
     {
         $row = $this->getGebruikerById($gebruikersId);
         return $row ? [$row] : [];
     }
 
-    // Zoek gebruikers op naam (LIKE)
+    // Zoek gebruikers op naam
     public function zoekOpNaam(string $naam): array
     {
         $sql = "SELECT * FROM $this->table_name WHERE gebruikersnaam LIKE :naam";
@@ -42,7 +42,7 @@ class gebruikers extends Database
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    // Zoek gebruikers op rol (LIKE)
+    // Zoek gebruikers op rol
     public function zoekOpRol(string $rol): array
     {
         $sql = "SELECT * FROM $this->table_name WHERE rol LIKE :rol";
@@ -58,7 +58,7 @@ class gebruikers extends Database
         $stmt = self::$conn->prepare($sql);
         return $stmt->execute([
             'naam'       => $data['gebruikersnaam'],
-            'wachtwoord' => $data['wachtwoord'], // Zorg dat dit gehashed is!
+            'wachtwoord' => $data['wachtwoord'], 
             'rol'        => $data['rol']
         ]);
     }

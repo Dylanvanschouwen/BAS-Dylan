@@ -1,4 +1,7 @@
 <?php
+// auteur: Dylan van Schouwen
+// functie: Magazijn medewerker menu pagina
+
 session_start();
 if (!isset($_SESSION['rol']) || strtolower($_SESSION['rol']) !== 'magazijnmedewerker') {
     header("Location: ../User Interaction/Login.php");

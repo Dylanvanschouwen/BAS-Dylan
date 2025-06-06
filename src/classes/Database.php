@@ -10,8 +10,6 @@ use PDOException;
 require_once "config.php";
 
 class Database{
-	// protected: binnen class en sub../classes
-	// static omdat de connectie bewaard blijft
 	protected static $conn = NULL;
 	
 	private $servername = SERVERNAME;
@@ -21,8 +19,6 @@ class Database{
 	
 	// Methods
 	public function __construct(){
-		//self::$conn = null;	
-		// Test of de connectie al eerder gedaan is. Daarom static variabele
 		if (!self::$conn) {
 			try{
 				 self::$conn = new PDO ("mysql:host=$this->servername;
@@ -32,14 +28,13 @@ class Database{
 
 				 self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION) ;
 				 self::$conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-				 //echo "Connectie is gelukt <br />" ;
 			}
 
 			catch(PDOException $e){
 				 echo "Connectie mislukt: " . $e->getMessage() ;
 			}
 		} else {
-			//echo "Database is al geconnected<br>";
+
 		}
 	}
 	

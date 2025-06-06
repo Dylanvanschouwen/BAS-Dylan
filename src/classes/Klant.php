@@ -127,13 +127,13 @@ class Klant extends Database
         echo "</select>";
     }
 
-    // CRUD-overzicht (tabel tonen)
+    // CRUD-overzicht
     public function crudKlant(): void
     {
         $lijst = $this->getKlanten();
         $this->showTable($lijst);
     }
-
+    // Zoekfunctie op klantnaam
     public function zoekOpNaam(string $naam): array
     {
         $sql = "SELECT * FROM $this->table_name WHERE klantNaam LIKE :naam";
@@ -141,7 +141,7 @@ class Klant extends Database
         $stmt->execute(['naam' => '%' . $naam . '%']);
         return $stmt->fetchAll();
     }
-
+//zoekfunctie op postcode
     public function zoekOpPostcode(string $postcode): array
     {
         $sql = "SELECT * FROM $this->table_name WHERE klantPostcode LIKE :postcode";

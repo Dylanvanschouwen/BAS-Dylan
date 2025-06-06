@@ -1,21 +1,19 @@
 <?php 
 // auteur: Dylan van schouwen
-// functie: 
+// functie: gebruiker verwijderen
 
-// Autoloader classes via composer
 require '../../vendor/autoload.php';
 use Bas\classes\gebruikers;
 
-if(isset($_POST["verwijderen"])){
-	
-	// Maak een object gebruikers
-	
-	
-	// Delete gebruikers op basis van NR
-	
-
-	echo '<script>alert("gebruikers verwijderd")</script>';
-	echo "<script> location.replace('read.php'); </script>";
+if (isset($_POST["verwijderen"]) && isset($_POST["gebruikersId"])) {
+    $gebruikersObj = new gebruikers();
+    $gebruikersId = (int)$_POST["gebruikersId"];
+    $gebruikersObj->deleteGebruiker($gebruikersId);
+    header("Location: read.php?deleted=1");
+    exit;
+} else {
+    header("Location: read.php");
+    exit;
 }
 ?>
 

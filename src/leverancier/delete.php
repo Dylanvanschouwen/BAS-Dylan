@@ -1,8 +1,7 @@
 <?php 
 // auteur: Dylan van schouwen
-// functie: 
-
-// Autoloader classes via composer
+// functie: leverancier verwijderen
+session_start();
 require '../../vendor/autoload.php';
 require_once '../classes/leverancier.php';
 use Bas\classes\leverancier;

@@ -17,7 +17,6 @@ $verkoopordersObj = new verkooporders();
 $klantObj = new Klant();
 $artikelObj = new artikel();
 
-// Haal alle klanten en artikelen op voor de dropdowns
 $klanten = $klantObj->getKlanten();
 $artikelen = $artikelObj->getArtikelen();
 
@@ -39,8 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         exit;
     }
-
-    // Validatie: bestaat klant/artikel?
     $klantId = $_POST['klantId'] ?? '';
     $artId = $_POST['artId'] ?? '';
     $klantBestaat = false;

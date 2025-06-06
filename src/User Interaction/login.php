@@ -1,27 +1,26 @@
 <?php
 
+// auteur: Dylan van Schouwen
+// functie: Login pagina voor gebruikers
+
 session_start();
 require_once '../Includes/header.php';
 require_once '../classes/Database.php';
 
-// Error message variable
 $error = '';
 
-// Handle login POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $gebruikersnaam = $_POST['gebruikersnaam'] ?? '';
     $wachtwoord = $_POST['wachtwoord'] ?? '';
 
-    // Connect to DB
     $db = new Bas\classes\Database();
     $conn = $db->getConnection();
 
-    // Prepare and execute
     $stmt = $conn->prepare("SELECT * FROM gebruikers WHERE gebruikersnaam = :gebruikersnaam");
     $stmt->execute(['gebruikersnaam' => $gebruikersnaam]);
     $user = $stmt->fetch();
 
-    // Check password (assuming wachtwoord is hashed in DB)
+    // Check password
     if ($user && password_verify($wachtwoord, $user['wachtwoord'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['rol'] = strtolower($user['rol']);

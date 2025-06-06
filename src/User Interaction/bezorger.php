@@ -15,8 +15,6 @@ if (!isset($_SESSION['rol']) || strtolower($_SESSION['rol']) !== 'bezorger') {
 }
 
 $verkOrdObj = new verkooporders();
-
-// Zoekfunctionaliteit
 $zoekOrderId = isset($_GET['zoekOrderId']) ? trim($_GET['zoekOrderId']) : '';
 $zoekKlantId = isset($_GET['zoekKlantId']) ? trim($_GET['zoekKlantId']) : '';
 $zoekDatum   = isset($_GET['zoekDatum']) ? trim($_GET['zoekDatum']) : '';

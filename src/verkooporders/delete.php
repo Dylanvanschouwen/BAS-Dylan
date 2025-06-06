@@ -2,7 +2,6 @@
 // auteur: Dylan van schouwen
 // functie: verkooporder verwijderen
 
-// Autoloader classes via composer
 require '../../vendor/autoload.php';
 use Bas\classes\verkooporders;
 

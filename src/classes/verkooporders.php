@@ -15,7 +15,7 @@ class verkooporders extends Database
         return $stmt->fetchAll();
     }
 
-    // Haal één verkooporder op (voor update)
+    // Haal één verkooporder op
     public function getVerkooporder($verkOrdId) {
         $sql = "SELECT v.*, k.klantNaam, k.klantAdres, k.klantWoonplaats, k.klantPostcode
                 FROM verkooporder v
@@ -26,7 +26,7 @@ class verkooporders extends Database
         return $stmt->fetch();
     }
 
-    // Update een verkooporder (alle relevante velden)
+    // Update een verkooporder 
     public function updateVerkooporder(int $verkOrdId, array $data): bool {
         $sql = "UPDATE verkooporder SET
                     klantId = :klantId,
@@ -89,6 +89,7 @@ class verkooporders extends Database
             'verkOrdStatus'     => $data['verkOrdStatus']
         ]);
     }
+    // Update de status van een verkooporder
     public function updateStatus(int $verkOrdId, int $status): bool
     {
         $stmt = self::$conn->prepare("UPDATE verkooporder SET verkOrdStatus = :status WHERE verkOrdId = :verkOrdId");
@@ -96,7 +97,7 @@ class verkooporders extends Database
             ':status' => $status,
             ':verkOrdId' => $verkOrdId
         ]);
-    }
+    }// Zoek verkooporders op order ID
     public function zoekOpOrderId(int $verkOrdId) {
         $sql = "SELECT v.*, k.klantNaam, k.klantAdres, k.klantWoonplaats, k.klantPostcode
                 FROM verkooporder v
@@ -106,7 +107,7 @@ class verkooporders extends Database
         $stmt->execute(['id' => $verkOrdId]);
         return $stmt->fetchAll();
     }
-
+// Zoek verkooporders op klant ID
     public function zoekOpKlantId(int $klantId) {
         $sql = "SELECT v.*, k.klantNaam, k.klantAdres, k.klantWoonplaats, k.klantPostcode
                 FROM verkooporder v
@@ -116,7 +117,7 @@ class verkooporders extends Database
         $stmt->execute(['klantId' => $klantId]);
         return $stmt->fetchAll();
     }
-
+// Zoek verkooporders op datum
     public function zoekOpDatum(string $datum) {
         $sql = "SELECT v.*, k.klantNaam, k.klantAdres, k.klantWoonplaats, k.klantPostcode
                 FROM verkooporder v

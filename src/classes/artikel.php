@@ -78,7 +78,6 @@ class artikel extends Database {
             return $stmt->execute(['artId' => $artId]);
         } catch (\PDOException $e) {
             if ($e->getCode() == '23000') {
-                // Foreign key constraint violation
                 return false;
             }
             throw $e;
@@ -92,7 +91,7 @@ class artikel extends Database {
         return $stmt->fetchAll();
     }
 
-    // Zoek artikelen op omschrijving (LIKE)
+    // Zoek artikelen op omschrijving
     public function zoekOpOmschrijving(string $omschrijving): array {
         $sql = "SELECT * FROM $this->table_name WHERE artOmschrijving LIKE :omschrijving";
         $stmt = self::$conn->prepare($sql);
