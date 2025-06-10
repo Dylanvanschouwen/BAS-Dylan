@@ -14,7 +14,6 @@ use Bas\classes\artikel;
 
 $artikelObj = new artikel();
 
-// Zoekfunctionaliteit
 $zoekId = isset($_GET['zoekId']) ? trim($_GET['zoekId']) : '';
 $zoekOmschrijving = isset($_GET['zoekOmschrijving']) ? trim($_GET['zoekOmschrijving']) : '';
 

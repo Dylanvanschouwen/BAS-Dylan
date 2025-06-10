@@ -7,6 +7,9 @@ $isRoot = (dirname($_SERVER['PHP_SELF']) === '/2024-2025/BAS/src' || dirname($_S
 $stylePath = $isRoot ? 'style.css' : '../style.css';
 $logoPath = $isRoot ? 'IMG/BAS-logo.png' : '../IMG/BAS-logo.png';
 $homePath = $isRoot ? 'index.php' : '../index.php';
+$logoutPath = $isRoot ? 'User Interaction/Logout.php' : '../User Interaction/Logout.php';
+$loginPath = $isRoot ? 'User Interaction/Login.php' : '../User Interaction/Login.php';
+$accountPath = $isRoot ? 'User Interaction/Account.php' : '../User Interaction/Account.php';
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -31,11 +34,10 @@ $homePath = $isRoot ? 'index.php' : '../index.php';
         </div>
         <nav id="nav">
             <ul id="nav-list">
-                <li><a href="../gebruikers/read.php">Gebruikers</a></li>
-                <li><a href="../klant/read.php">Klant</a></li>
-                <li><a href="../artikel/read.php">Artikel</a></li>
-                <li><a href="../leverancier/read.php">Leverancier</a></li>
-                <li><a href="../verkooporders/read.php">Verkooporders</a></li>	
+                <li><a href="<?php echo $homePath; ?>">Home</a></li>
+                <li><a href="<?php echo $loginPath; ?>">Login</a></li>
+                <li><a href="<?php echo $logoutPath; ?>">Logout</a></li>
+                <li><a href="<?php echo $accountPath; ?>">Account</a></li>
             </ul>
         </nav>
     </header>

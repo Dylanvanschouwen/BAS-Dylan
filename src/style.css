@@ -97,6 +97,26 @@ body {
     color: #ffd700;
     outline: none;
 }
+.nav-btn {
+    background: #ff2222;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 24px;
+    padding: 12px 32px;
+    text-decoration: none;
+    font-size: 1.1em;
+    box-shadow: 2px 2px 8px #900;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+    margin: 0 2px;
+    display: inline-block;
+}
+.nav-btn:hover, .nav-btn:focus {
+    background: #b00;
+    color: #ffd700;
+    transform: scale(1.05);
+    outline: none;
+}
 
 /* ==========================================================
    FOOTER
@@ -585,3 +605,134 @@ body {
     background: #b00;
     color: #ffd700;
 }
+
+/* ==========================================================
+   ACCOUNT PAGINA
+   ========================================================== */
+.main-centered {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+}
+.account-card {
+    background: #fff;
+    padding: 40px 60px;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px #900;
+    min-width: 350px;
+    max-width: 420px;
+    margin: 32px auto;
+}
+.account-title {
+    color: #b00;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 28px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+.account-info {
+    margin-bottom: 32px;
+}
+.account-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.account-label {
+    color: #222;
+    font-weight: 600;
+}
+.account-value {
+    color: #444;
+    font-family: monospace;
+    font-size: 1.1em;
+}
+.account-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+.btn-logout {
+    background: #b00;
+    color: #fff;
+    box-shadow: 0 2px 8px #9002;
+}
+.btn-logout:hover {
+    background: #900;
+    color: #ffd700;
+}
+.btn-username {
+    background: #eee;
+    color: #b00;
+    border: 1px solid #b00;
+}
+.btn-username:hover {
+    background: #b00;
+    color: #fff;
+}
+.btn-password {
+    background: #eee;
+    color: #b00;
+    border: 1px solid #b00;
+}
+.btn-password:hover {
+    background: #b00;
+    color: #fff;
+}
+
+/* ==========================================================
+   POPUP STYLING
+   ========================================================== */
+.popup-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+}
+.popup-form {
+    background: #fff;
+    padding: 32px 48px;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px #900;
+    text-align: center;
+}
+.popup-title {
+    color: #b00;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+.popup-message {
+    color: #222;
+    font-size: 1.2em;
+    margin-bottom: 18px;
+}
+.btn-primary {
+    background: #b00;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 28px;
+    font-size: 1em;
+    cursor: pointer;
+}
+.btn-primary:hover { background: #900; }

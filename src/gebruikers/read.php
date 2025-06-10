@@ -13,7 +13,6 @@ $zoekId = isset($_GET['zoekId']) ? trim($_GET['zoekId']) : '';
 $zoekNaam = isset($_GET['zoekNaam']) ? trim($_GET['zoekNaam']) : '';
 $zoekRol = isset($_GET['zoekRol']) ? trim($_GET['zoekRol']) : '';
 
-// Zoeklogica uitbreiden:
 if ($zoekId !== '') {
     $gebruikers = $gebruikersObj->zoekOpId((int)$zoekId);
 } elseif ($zoekNaam !== '') {
